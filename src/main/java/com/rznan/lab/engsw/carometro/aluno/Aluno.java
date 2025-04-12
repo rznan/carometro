@@ -25,9 +25,9 @@ public class Aluno {
 
     private String ra;
     private String nome;
-    private int ano;
+    private int anoEntrada;
     private String historico;
-    private String comentarioFatec;
+    private String comentarioFaculdade;
     private String comentarioLivre;
 
 }
