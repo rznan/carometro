@@ -1,10 +1,12 @@
 package com.rznan.lab.engsw.carometro.aluno;
 
-// TODO: usar dtos de curso e faculdade no lugar do id
+import com.rznan.lab.engsw.carometro.curso.CursoDto;
+import com.rznan.lab.engsw.carometro.faculdade.FaculdadeDto;
+
 public record AlunoDto(
-        long id,
-        long idCurso,
-        long idFaculdade,
+        Long id,
+        CursoDto curso,
+        FaculdadeDto faculdade,
         String ra,
         String nome,
         int anoEntrada,
@@ -12,13 +14,11 @@ public record AlunoDto(
         String comentarioFaculdade,
         String comentarioLivre
 ) {
-        // TODO: Construtor que preenche os dtos de curso e faculdade com dados básicos (p.ex: id e nome)
-        // TODO: Construtor que preenche os dtos de curso e faculdade apenas com ID
-        public AlunoDto(Aluno a) {
-                this(
+        public static AlunoDto toDto(Aluno a) {
+                return new AlunoDto(
                         a.getId(),
-                        a.getCurso().getId(),
-                        a.getFaculdade().getId(),
+                        CursoDto.toDto(a.getCurso(), false),
+                        FaculdadeDto.toDto(a.getFaculdade(), false),
                         a.getRa(),
                         a.getNome(),
                         a.getAnoEntrada(),

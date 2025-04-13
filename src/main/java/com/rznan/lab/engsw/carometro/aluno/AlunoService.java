@@ -18,7 +18,7 @@ public class AlunoService implements IService<AlunoDto, Long> {
     @Override
     public List<AlunoDto> getAll() {
         // transforma a lista de aluno do dto em uma lista de dtos de aluno
-        return alunoRepository.findAll(Sort.by("nome").ascending()).stream().map(AlunoDto::new).toList();
+        return alunoRepository.findAll(Sort.by("nome").ascending()).stream().map(AlunoDto::toDto).toList();
     }
 
     @Override
@@ -28,7 +28,7 @@ public class AlunoService implements IService<AlunoDto, Long> {
             alunos.add(alunoRepository.getReferenceById(l));
         }
         // transforma a lista de aluno do dto em uma lista de dtos de aluno
-        return alunos.stream().map(AlunoDto::new).toList();
+        return alunos.stream().map(AlunoDto::toDto).toList();
     }
 
     @Override
@@ -37,7 +37,7 @@ public class AlunoService implements IService<AlunoDto, Long> {
         if (aluno == null) {
             return null;
         }
-        return new AlunoDto(aluno);
+        return AlunoDto.toDto(aluno);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class AlunoService implements IService<AlunoDto, Long> {
             return null;
         }
         Aluno a = new Aluno(alunoDto);
-        return new AlunoDto(alunoRepository.save(a));
+        return AlunoDto.toDto(alunoRepository.save(a));
     }
 
     @Override
