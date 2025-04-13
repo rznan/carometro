@@ -5,10 +5,6 @@ import jakarta.validation.constraints.NotBlank;
 public record DadosAtualizacaoAluno(
         @NotBlank
         long id,
-        @NotBlank
-        long idCurso,
-        @NotBlank
-        long idFaculdade,
         String ra,
         String nome,
         int anoEntrada,
