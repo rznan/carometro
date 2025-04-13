@@ -1,17 +1,10 @@
-package com.rznan.lab.engsw.carometro.aluno.dtos;
+package com.rznan.lab.engsw.carometro.aluno;
 
-import com.rznan.lab.engsw.carometro.aluno.Aluno;
-import jakarta.validation.constraints.NotBlank;
-
-public record DadosListagemAluno(
-        @NotBlank
+// TODO: usar dtos de curso e faculdade no lugar do id
+public record AlunoDto(
         long id,
-        @NotBlank
         long idCurso,
-        String tituloCurso,
-        @NotBlank
         long idFaculdade,
-        String nomeFaculdade,
         String ra,
         String nome,
         int anoEntrada,
@@ -19,13 +12,13 @@ public record DadosListagemAluno(
         String comentarioFaculdade,
         String comentarioLivre
 ) {
-        public DadosListagemAluno(Aluno a) {
+        // TODO: Construtor que preenche os dtos de curso e faculdade com dados básicos (p.ex: id e nome)
+        // TODO: Construtor que preenche os dtos de curso e faculdade apenas com ID
+        public AlunoDto(Aluno a) {
                 this(
                         a.getId(),
                         a.getCurso().getId(),
-                        a.getCurso().getTitulo(),
                         a.getFaculdade().getId(),
-                        a.getFaculdade().getNome(),
                         a.getRa(),
                         a.getNome(),
                         a.getAnoEntrada(),

@@ -5,10 +5,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public interface IService<Entity, DTO, ID> {
-	public List<Entity> getAll();
-	public List<Entity> getAllById(List<ID> idList);
-	public Entity getById(ID id);
-	public void save(DTO dto);
-	public void delete(ID id);
+public interface IService<Dto, ID> {
+	List<Dto> getAll();
+	List<Dto> getAllById(List<ID> idList);
+	Dto getById(ID id);
+	Dto save(Dto dto);
+	Dto update(Dto dto);
+	void delete(ID id);
 }

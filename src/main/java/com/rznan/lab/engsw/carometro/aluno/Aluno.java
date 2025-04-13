@@ -1,6 +1,5 @@
 package com.rznan.lab.engsw.carometro.aluno;
 
-import com.rznan.lab.engsw.carometro.aluno.dtos.DadosCadastroAluno;
 import com.rznan.lab.engsw.carometro.curso.Curso;
 import com.rznan.lab.engsw.carometro.faculdade.Faculdade;
 import jakarta.persistence.*;
@@ -31,7 +30,7 @@ public class Aluno {
     private String comentarioFaculdade;
     private String comentarioLivre;
 
-    public Aluno(DadosCadastroAluno dados) {
+    public Aluno(AlunoDto dados) {
         this.nome = dados.nome();
         this.ra = dados.ra();
         this.anoEntrada = dados.anoEntrada();
