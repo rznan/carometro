@@ -2,7 +2,11 @@ package com.rznan.lab.engsw.carometro.aluno.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 
-public record DadosCadastroAluno(
+public record CreateAlunoDto(
+        @NotBlank
+        long idCurso,
+        @NotBlank
+        long idFaculdade,
         String ra,
         String nome,
         int anoEntrada,

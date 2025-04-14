@@ -1,6 +1,7 @@
 package com.rznan.lab.engsw.carometro.aluno;
 
-import com.rznan.lab.engsw.carometro.aluno.dtos.DadosCadastroAluno;
+import com.rznan.lab.engsw.carometro.aluno.dtos.UpdateAlunoDto;
+import com.rznan.lab.engsw.carometro.aluno.dtos.CreateAlunoDto;
 import com.rznan.lab.engsw.carometro.curso.Curso;
 import com.rznan.lab.engsw.carometro.faculdade.Faculdade;
 import jakarta.persistence.*;
@@ -31,7 +32,7 @@ public class Aluno {
     private String comentarioFaculdade;
     private String comentarioLivre;
 
-    public Aluno(DadosCadastroAluno dados) {
+    public Aluno(CreateAlunoDto dados) {
         this.nome = dados.nome();
         this.ra = dados.ra();
         this.anoEntrada = dados.anoEntrada();
@@ -40,4 +41,13 @@ public class Aluno {
         this.comentarioLivre = dados.comentarioLivre();
     }
 
+    public void update(UpdateAlunoDto dados) {
+        // TODO: checar se os campos estão em branco
+        this.nome = dados.nome();
+        this.ra = dados.ra();
+        this.anoEntrada = dados.anoEntrada();
+        this.historico = dados.historico();
+        this.comentarioFaculdade = dados.comentarioFaculdade();
+        this.comentarioLivre = dados.comentarioLivre();
+    }
 }

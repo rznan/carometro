@@ -3,7 +3,7 @@ package com.rznan.lab.engsw.carometro.aluno.dtos;
 import com.rznan.lab.engsw.carometro.aluno.Aluno;
 import jakarta.validation.constraints.NotBlank;
 
-public record DadosListagemAluno(
+public record DetailsAlunoDto(
         @NotBlank
         long id,
         @NotBlank
@@ -19,7 +19,7 @@ public record DadosListagemAluno(
         String comentarioFaculdade,
         String comentarioLivre
 ) {
-        public DadosListagemAluno(Aluno a) {
+        public DetailsAlunoDto(Aluno a) {
                 this(
                         a.getId(),
                         a.getCurso().getId(),
