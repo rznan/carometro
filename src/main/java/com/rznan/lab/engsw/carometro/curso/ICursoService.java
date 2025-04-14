@@ -1,23 +1,21 @@
 package com.rznan.lab.engsw.carometro.curso;
 
-import com.rznan.lab.engsw.carometro.aluno.dtos.AlunoDto;
-import com.rznan.lab.engsw.carometro.aluno.dtos.CreateAlunoDto;
-import com.rznan.lab.engsw.carometro.aluno.dtos.DetailsAlunoDto;
-import com.rznan.lab.engsw.carometro.aluno.dtos.UpdateAlunoDto;
+
+import com.rznan.lab.engsw.carometro.curso.dtos.*;
 
 import java.util.List;
 
 public interface ICursoService {
 
-    List<AlunoDto> getAll();
+    List<CursoDto> getAll();
 
-    List<AlunoDto> getAllById(List<Long> ids);
+    List<CursoDto> getAllById(List<Long> ids);
 
-    DetailsAlunoDto getById(Long id);
+    DetailsCursoDto getById(Long id);
 
-    AlunoDto save(CreateAlunoDto dadosCadastroAluno);
+    CursoDto save(CreateCursoDto dadosCadastroCurso);
 
-    void update(UpdateAlunoDto updateAlunoDto);
+    void update(UpdateCursoDto updateCursoDto);
 
     void delete(Long id);
 }
