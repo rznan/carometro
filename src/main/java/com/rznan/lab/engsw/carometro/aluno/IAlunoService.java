@@ -12,9 +12,9 @@ public interface IAlunoService {
 
     DetailsAlunoDto getById(Long id);
 
-    AlunoDto save(CreateAlunoDto dadosCadastroAluno);
+    AlunoDto save(CreateAlunoDto dadosCadastroAluno) throws Exception;
 
-    void update(UpdateAlunoDto updateAlunoDto);
+    void update(UpdateAlunoDto updateAlunoDto) throws Exception;
 
     void delete(Long id);
 }

@@ -1,6 +1,9 @@
 package com.rznan.lab.engsw.carometro.curso;
 
 import com.rznan.lab.engsw.carometro.aluno.Aluno;
+import com.rznan.lab.engsw.carometro.aluno.dtos.UpdateAlunoDto;
+import com.rznan.lab.engsw.carometro.curso.dtos.CreateCursoDto;
+import com.rznan.lab.engsw.carometro.curso.dtos.UpdateCursoDto;
 import com.rznan.lab.engsw.carometro.faculdade.Faculdade;
 import jakarta.persistence.*;
 import lombok.*;
@@ -28,4 +31,14 @@ public class Curso {
 
     private String titulo;
     private Date inauguracao;
+
+    public Curso(CreateCursoDto dados) {
+        this.titulo = dados.titulo();
+        this.inauguracao = dados.inauguracao();
+    }
+
+    public void update(UpdateCursoDto dados) {
+        this.titulo = dados.titulo();
+        this.inauguracao = dados.inauguracao();
+    }
 }
