@@ -22,8 +22,6 @@ public class Aluno {
 
     @ManyToOne
     private Curso curso;
-    @ManyToOne
-    private Faculdade faculdade;
 
     private String ra;
     private String nome;

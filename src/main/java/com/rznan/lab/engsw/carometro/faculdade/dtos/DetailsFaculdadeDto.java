@@ -10,7 +10,6 @@ import java.util.List;
 public record DetailsFaculdadeDto(
         Long id,
         List<CursoDto> cursos,
-        List<AlunoDto> alunos,
         String nome,
         Date inauguracao
 ) {
@@ -19,7 +18,6 @@ public record DetailsFaculdadeDto(
             this(
                 faculdade.getId(),
                 faculdade.getCursos().stream().map(CursoDto::new).toList(),
-                faculdade.getAlunos().stream().map(AlunoDto::new).toList(),
                 faculdade.getNome(),
                 faculdade.getInauguracao()
         );

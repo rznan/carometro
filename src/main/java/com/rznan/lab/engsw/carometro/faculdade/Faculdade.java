@@ -23,8 +23,6 @@ public class Faculdade {
 
     @OneToMany(mappedBy = "faculdade")
     private List<Curso> cursos;
-    @OneToMany(mappedBy = "faculdade")
-    private List<Aluno> alunos;
 
     private String nome;
     private Date inauguracao;

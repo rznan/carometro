@@ -1,17 +1,14 @@
 package com.rznan.lab.engsw.carometro.aluno.dtos;
 
 import com.rznan.lab.engsw.carometro.aluno.Aluno;
+import com.rznan.lab.engsw.carometro.curso.dtos.CursoDto;
 import jakarta.validation.constraints.NotBlank;
 
 public record DetailsAlunoDto(
         @NotBlank
         long id,
         @NotBlank
-        long idCurso,
-        String tituloCurso,
-        @NotBlank
-        long idFaculdade,
-        String nomeFaculdade,
+        CursoDto curso,
         String ra,
         String nome,
         int anoEntrada,
@@ -22,10 +19,7 @@ public record DetailsAlunoDto(
         public DetailsAlunoDto(Aluno a) {
                 this(
                         a.getId(),
-                        a.getCurso().getId(),
-                        a.getCurso().getTitulo(),
-                        a.getFaculdade().getId(),
-                        a.getFaculdade().getNome(),
+                        new CursoDto(a.getCurso()),
                         a.getRa(),
                         a.getNome(),
                         a.getAnoEntrada(),
