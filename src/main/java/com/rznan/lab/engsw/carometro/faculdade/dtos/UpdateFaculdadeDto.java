@@ -9,7 +9,6 @@ import java.util.List;
 public record UpdateFaculdadeDto(
         Long id,
         List<Long> cursoIds,
-        List<Long> alunoIds,
         String nome,
         Date inauguracao
 ) {

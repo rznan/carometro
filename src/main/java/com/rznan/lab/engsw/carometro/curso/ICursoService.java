@@ -13,9 +13,9 @@ public interface ICursoService {
 
     DetailsCursoDto getById(Long id);
 
-    CursoDto save(CreateCursoDto dadosCadastroCurso);
+    CursoDto save(CreateCursoDto dadosCadastroCurso) throws Exception;
 
-    void update(UpdateCursoDto updateCursoDto);
+    void update(UpdateCursoDto updateCursoDto) throws Exception;
 
     void delete(Long id);
 }

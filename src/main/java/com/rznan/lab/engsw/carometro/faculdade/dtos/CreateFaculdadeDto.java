@@ -5,7 +5,6 @@ import java.util.List;
 
 public record CreateFaculdadeDto(
         List<Long> cursoIds,
-        List<Long> alunoIds,
         String nome,
         Date inauguracao
 ) {
