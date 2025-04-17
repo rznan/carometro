@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Carômetro Universitário</title>
+    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a th:href="@{/faculdades}">Faculdades</a></li>
+            <li><a th:href="@{/cursos}">Cursos</a></li>
+            <li><a th:href="@{/alunos}">Alunos</a></li>
+            <li><a th:href="@{/}"><i class="fas fa-home"></i> Início</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main layout:fragment="conteudo">
+    <!-- Conteúdo das páginas filhas será inserido aqui -->
+</main>
+
+<footer>
+    <p>© 2025 Carômetro Universitário</p>
+</footer>
+</body>
+</html>
