@@ -4,6 +4,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{template.html}">
 <head>
+    <meta charset="UTF-8">
     <title>Faculdades</title>
 </head>
 <body>
@@ -25,7 +26,7 @@
             <tr th:each="faculdade : ${faculdades}">
                 <td th:text="${faculdade.id}">1</td>
                 <td th:text="${faculdade.nome}">Nome da Faculdade</td>
-                <td th:text="${#dates.format(faculdade.inauguracao, 'dd/MM/yyyy')}">01/01/2000</td>
+                <td th:text="${#temporals.format(faculdade.inauguracao, 'dd/MM/yyyy')}">01/01/2000</td>
                 <td>
                     <a th:href="@{/faculdades/{id}/editar(id=${faculdade.id})}" class="btn btn-sm btn-warning">Editar</a>
                     <form th:action="@{/faculdades/{id}/excluir(id=${faculdade.id})}" method="post" style="display:inline;">
