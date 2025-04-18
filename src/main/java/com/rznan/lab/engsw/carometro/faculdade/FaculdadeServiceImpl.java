@@ -2,6 +2,7 @@ package com.rznan.lab.engsw.carometro.faculdade;
 
 import com.rznan.lab.engsw.carometro.curso.CursoServiceImpl;
 import com.rznan.lab.engsw.carometro.faculdade.dtos.*;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -56,6 +57,7 @@ public class FaculdadeServiceImpl implements IFaculdadeService {
     }
 
     @Override
+    @Transactional
     public FaculdadeDto save(CreateFaculdadeDto dto) {
         if (dto == null) return null;
 
@@ -66,6 +68,7 @@ public class FaculdadeServiceImpl implements IFaculdadeService {
     }
 
     @Override
+    @Transactional
     public void update(UpdateFaculdadeDto dto) {
         if (dto == null) return;
 
@@ -77,11 +80,10 @@ public class FaculdadeServiceImpl implements IFaculdadeService {
 
         faculdade.update(dto);
         faculdade.setCursos(cursoService.getCursosByIds(dto.cursoIds()));
-
-        repository.save(faculdade);
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         repository.deleteById(id);
     }

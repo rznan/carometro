@@ -29,7 +29,9 @@
                 <td th:text="${#temporals.format(faculdade.inauguracao, 'dd/MM/yyyy')}">01/01/2000</td>
                 <td>
                     <a th:href="@{/faculdades/{id}/editar(id=${faculdade.id})}" class="btn btn-sm btn-warning">Editar</a>
-                    <form th:action="@{/faculdades/{id}/excluir(id=${faculdade.id})}" method="post" style="display:inline;">
+                    <form th:action="@{/faculdades}" method="post" style="display:inline;">
+                        <input type="hidden" name="_method" value="delete">
+                        <input type="hidden" name="id" th:value="${faculdade.id}">
                         <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
                     </form>
                 </td>

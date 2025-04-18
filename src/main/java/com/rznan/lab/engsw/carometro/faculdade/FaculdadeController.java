@@ -2,14 +2,14 @@ package com.rznan.lab.engsw.carometro.faculdade;
 
 import com.rznan.lab.engsw.carometro.curso.ICursoService;
 import com.rznan.lab.engsw.carometro.faculdade.dtos.CreateFaculdadeDto;
+import com.rznan.lab.engsw.carometro.faculdade.dtos.DetailsFaculdadeDto;
+import com.rznan.lab.engsw.carometro.faculdade.dtos.FaculdadeDto;
+import com.rznan.lab.engsw.carometro.faculdade.dtos.UpdateFaculdadeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,6 +17,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/faculdades")
 public class FaculdadeController {
+
     @Lazy @Autowired
     private IFaculdadeService faculdadeServiceImpl;
     @Lazy @Autowired
@@ -38,9 +39,35 @@ public class FaculdadeController {
         return "faculdade/registry";
     }
 
+    @GetMapping("{id}/editar")
+    public String loadEditFaculdadePage(@PathVariable Long id,  Model model) {
+        DetailsFaculdadeDto dto = faculdadeServiceImpl.getById(id);
+        if (dto == null) {
+            return "redirect:faculdades";
+        }
+        model.addAttribute("faculdade", dto);
+        model.addAttribute("cursos", cursoServiceImpl.getAll());
+        return "faculdade/update";
+    }
+
     @PostMapping
     public String saveFaculdade(@ModelAttribute CreateFaculdadeDto dto) {
-        faculdadeServiceImpl.save(dto);
+        System.out.println("[Carômetro] -- Salvando nova Faculdade");
+        FaculdadeDto saved = faculdadeServiceImpl.save(dto);
+        System.out.println("[Carômetro] -- Salvo como: \n\t" + saved);
         return "redirect:faculdades";
     }
+
+    @PutMapping
+    public String updateFaculdade(@ModelAttribute UpdateFaculdadeDto dto) {
+        faculdadeServiceImpl.update(dto);
+        return "redirect:faculdades";
+    }
+
+    @DeleteMapping
+    public String deleteFaculdade(Long id) {
+        faculdadeServiceImpl.delete(id);
+        return "redirect:faculdades";
+    }
+
 }

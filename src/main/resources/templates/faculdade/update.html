@@ -4,43 +4,44 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{template.html}">
 <head>
-    <title>Cadastrar Faculdade</title>
     <meta charset="UTF-8">
+    <title>Editar Faculdade</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <section layout:fragment="conteudo">
     <div class="container mt-5">
-        <h2 class="mb-4">Cadastro de Faculdade</h2>
+        <h2 class="mb-4">Editar Faculdade</h2>
 
-        <form th:action="@{/faculdades}" th:object="${faculdade}" method="post" class="needs-validation" novalidate>
+        <form th:action="@{/faculdades}" th:object="${faculdade}" method="post">
+            <input type="hidden" name="_method" value="put" />
+            <input type="hidden" th:field="*{id}" />
+
             <div class="mb-3">
-                <label for="nome" class="form-label">Nome da Faculdade</label>
-                <input type="text" id="nome" class="form-control" th:field="*{nome}" required>
-                <div class="invalid-feedback">
-                    Por favor, informe o nome da faculdade.
-                </div>
+                <label class="form-label">Nome da Faculdade</label>
+                <input type="text" class="form-control" th:field="*{nome}" required />
             </div>
 
             <div class="mb-3">
-                <label for="inauguracao" class="form-label">Data de Inauguração</label>
-                <input type="date" id="inauguracao" class="form-control" th:field="*{inauguracao}" required>
-                <div class="invalid-feedback">
-                    Por favor, informe a data de inauguração.
-                </div>
+                <label class="form-label">Data de Inauguração</label>
+                <input type="date" name="inauguracao"
+                       class="form-control"
+                       th:value="${#temporals.format(faculdade.inauguracao, 'yyyy-MM-dd')}" required>
             </div>
 
             <div class="mb-4">
-                <label for="cursos" class="form-label">Cursos Disponíveis</label>
-                <select id="cursos" multiple class="form-select" th:field="*{cursoIds}">
-                    <option th:each="curso : ${cursos}"
+                <label class="form-label">Cursos Associados</label>
+                <select multiple class="form-select" name="cursoIds">
+                    <option th:each="curso : ${todosCursos}"
                             th:value="${curso.id}"
-                            th:text="${curso.titulo} + ' (' + ${curso.faculdadeNome} + ')'">
+                            th:selected="${#lists.contains(faculdade.cursos, curso)}"
+                            th:text="${curso.titulo + ' (' + curso.faculdadeNome + ')'}">
                     </option>
                 </select>
                 <div class="form-text">Segure Ctrl (ou Command) para selecionar mais de um curso.</div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Cadastrar</button>
+            <button type="submit" class="btn btn-success">Salvar Alterações</button>
             <a th:href="@{/faculdades}" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>

@@ -42,6 +42,9 @@ public class CursoServiceImpl implements ICursoService {
     }
 
     public List<Curso> getCursosByIds(List<Long> ids) {
+        if (ids == null) {
+            return List.of();
+        }
         List<Curso> cursos = new ArrayList<>();
         for (Long id : ids) {
             repository.findById(id).ifPresentOrElse(
