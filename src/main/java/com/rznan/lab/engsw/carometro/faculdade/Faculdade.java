@@ -6,7 +6,7 @@ import com.rznan.lab.engsw.carometro.faculdade.dtos.UpdateFaculdadeDto;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Table(name = "faculdade")
@@ -26,7 +26,7 @@ public class Faculdade {
     private List<Curso> cursos;
 
     private String nome;
-    private Date inauguracao;
+    private LocalDate inauguracao;
 
     public Faculdade(CreateFaculdadeDto dto) {
         this.nome = dto.nome();

@@ -2,12 +2,12 @@ package com.rznan.lab.engsw.carometro.faculdade.dtos;
 
 import com.rznan.lab.engsw.carometro.faculdade.Faculdade;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public record FaculdadeDto(
         Long id,
         String nome,
-        Date inauguracao
+        LocalDate inauguracao
 ) {
 
     public FaculdadeDto(Faculdade faculdade) {
