@@ -15,6 +15,8 @@ import lombok.*;
 @Getter
 @Setter
 public class Aluno {
+    //TODO: criar campo para dizer se foi aprovado ou não ou fazer o registro de solicitações de maneira diferente
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "aluno_id")

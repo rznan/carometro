@@ -1,258 +1,114 @@
-/* RESET */
+    /* Reset básico */
+ * {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   border: 0;
+   font-size: 60%;
+   font: inherit;
+   vertical-align: baseline;
+ }
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 60%;
-    font: inherit;
-    vertical-align: baseline;
+ /* Estilo do header */
+ header {
+   background-color: #1e3a8a; /* Azul escuro */
+   color: #ffffff;
+   padding: 1rem 2rem;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+ }
+
+ /* Navegação dentro do header */
+ header nav ul {
+   list-style: none;
+   display: flex;
+   gap: 1.5rem;
+ }
+
+ header nav ul li a {
+   color: #ffffff;
+   text-decoration: none;
+   font-weight: 500;
+   transition: color 0.3s;
+ }
+
+ header nav ul li a:hover {
+   color: #93c5fd; /* Azul claro ao passar o mouse */
+ }
+
+ /* Estilo do footer */
+ footer {
+   background-color: #1e3a8a;
+   color: #ffffff;
+   text-align: center;
+   padding: 1rem 2rem;
+   margin-top: auto;
+ }
+
+ /* Layout principal para garantir que o footer fique na parte inferior */
+ body {
+   display: flex;
+   flex-direction: column;
+   min-height: 100vh;
+ }
+
+ main {
+   flex: 1;
+   padding: 2rem;
+ }
+/* Container dos cards */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  padding: 2rem;
 }
 
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-    display: block;
-}
-body {
-    line-height: 1;
-}
-ol, ul {
-    list-style: none;
-}
-blockquote, q {
-    quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-    content: '';
-    content: none;
-}
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-img {
-    width: inherit;
-}
-
-button {
-    font-family: inherit;
-    font-size: inherit;
-    color: inherit;
-    font-weight: inherit;
-    padding: 0;
-    border: none;
-    background-color: unset;
-}
-
-input {
-    border: none;
-    color: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    font-family: inherit;
-}
-
-textarea {
-    border: none;
-    color: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    font-family: inherit;
-}
-
-select {
-    border: none;
-    color: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    font-family: inherit;
-}
-
-*,
-*::before,
-*::after {
-    --azul-escuro: #154580;
-    --azul-medio: #3970BE;
-    --azul-claro: #E5F1FF;
-    --cinza-texto: #444444;
-    --cinza-claro: #ECECEC;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Roboto, Arial, Helvetica, sans-serif;
-    background-color: var(--azul-claro);
-    font-size: 12px;
-    color: white;
-    box-sizing: border-box;
-    text-align: center;
-}
-
-button {
-  background-color: var(--azul-escuro);
-  color: white;
-  border: none;
-  border-radius: 2px;
-  padding: 15px;
-  font-size: 12px;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-/* NAVBAR */
-
-
-
-.nav-bar {
-    background-color: lightblue; /* Cor de fundo da barra de navegação */
-    padding: 10px; /* Espaçamento interno */
-}
-
-nav ul {
-    list-tyle: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
-
-nav li {
-    margin: 0 1.5em;
-}
-
-nav a {
-    text-decoration: none;
-    color: var(--cinza-texto);
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 1.2em;
-}
-
-nav a:hover {
-    color: var(--azul-escuro);
-}
-
-div > a {
-    color: var(--azul-escuro);
-    text-decoration: underline;
-    font-size: 18px;
-    margin: 10px;
-    display: inline-block;
-}
-
-/* TABELA */
-
-table {
-  width: 80%;
-  margin: 0 auto;
-  border-collapse: collapse;
-  font-size: 16px;
-}
-
-th {
-  background-color: var(--azul-escuro);
-  color: white;
-  font-weight: bold;
-  padding: 12px;
+/* Estilo individual dos cards */
+.card {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 300px;
   text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-td {
-  padding: 12px;
-  border-bottom: 1px solid var(--cinza-claro);
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
 }
 
-tbody tr {
-  background-color: var(--azul-medio);
+/* Título do card */
+.card h2 {
+  font-size: 1.5rem;
+  color: #1e3a8a;
+  margin-bottom: 1rem;
 }
 
-td a {
-    text-decoration: underline;
-    margin: 0 20px;
-    padding-top: 15px;
+/* Descrição do card */
+.card p {
+  font-size: 1rem;
+  color: #4b5563;
+  margin-bottom: 1.5rem;
 }
 
-td > form {
-    display: inline;
-}
-tr:nth-child(even){
-
-    background-color: var(--cinza-claro);
-    color: black;
-}
-
-/* FORM */
-
-div > form {
-    margin: 3em 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: initial;
+/* Botão do card */
+.card-button {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #1e3a8a;
+  color: #ffffff;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.3s;
 }
 
-form div {
-    margin: 1em;
-    font-size: 1.6em;
-}
-
-h1 {
-    color: var(--azul-medio);
-    font-weight: bold;
-    font-size: 20px;
-    text-transform: uppercase;
-    margin: 20px 0;
-}
-
-form div input {
-    width: 50vw;
-    border-radius: 2px;
-    display: block;
-    color: black;
-    padding: 1em
-}
-
-select {
-    width: 50vw;
-    border-radius: 2px;
-    display: block;
-    color: black;
-    padding: 1em
-}
-
-label {
-    line-height: 1.5;
-    padding: 0 0 .1em 1em;
-    font-weight: 700;
-    color: var(--azul-medio);
-}
-
-input[type="submit"] {
-  background-color: var(--azul-escuro);
-  color: white;
-  border: none;
-  border-radius: 2px;
-  padding: 15px;
-  font-size: 12px;
-  text-transform: uppercase;
-  cursor: pointer;
+.card-button:hover {
+  background-color: #374151;
 }

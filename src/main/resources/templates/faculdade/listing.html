@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}">
+<head>
+    <title>Faculdades</title>
+</head>
+<body>
+<section layout:fragment="conteudo">
+    <div class="container">
+        <h1>Faculdades</h1>
+        <a href="/faculdades/novo" class="btn btn-primary">Incluir Faculdade</a>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Inauguração</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="faculdade : ${faculdades}">
+                <td th:text="${faculdade.id}">1</td>
+                <td th:text="${faculdade.nome}">Nome da Faculdade</td>
+                <td th:text="${#dates.format(faculdade.inauguracao, 'dd/MM/yyyy')}">01/01/2000</td>
+                <td>
+                    <a th:href="@{/faculdades/{id}/editar(id=${faculdade.id})}" class="btn btn-sm btn-warning">Editar</a>
+                    <form th:action="@{/faculdades/{id}/excluir(id=${faculdade.id})}" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+</body>
+</html>
