@@ -2,14 +2,14 @@ package com.rznan.lab.engsw.carometro.curso.dtos;
 
 import com.rznan.lab.engsw.carometro.curso.Curso;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public record CursoDto(
         Long id,
         Long faculdadeId,
         String faculdadeNome,
         String titulo,
-        Date inauguracao
+        LocalDate inauguracao
 ) {
     public CursoDto(Curso curso) {
             this(

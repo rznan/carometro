@@ -4,7 +4,7 @@ import com.rznan.lab.engsw.carometro.aluno.dtos.AlunoDto;
 import com.rznan.lab.engsw.carometro.curso.Curso;
 import com.rznan.lab.engsw.carometro.faculdade.dtos.FaculdadeDto;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public record DetailsCursoDto(
@@ -12,7 +12,7 @@ public record DetailsCursoDto(
         List<AlunoDto> alunos,
         FaculdadeDto faculdade,
         String titulo,
-        Date inauguracao
+        LocalDate inauguracao
 ) {
     public DetailsCursoDto(Curso curso) {
             this(

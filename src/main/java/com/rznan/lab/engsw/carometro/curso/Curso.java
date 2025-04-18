@@ -8,7 +8,7 @@ import com.rznan.lab.engsw.carometro.faculdade.Faculdade;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Table(name = "curso")
@@ -30,7 +30,7 @@ public class Curso {
     private Faculdade faculdade;
 
     private String titulo;
-    private Date inauguracao;
+    private LocalDate inauguracao;
 
     public Curso(CreateCursoDto dados) {
         this.titulo = dados.titulo();
