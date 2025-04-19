@@ -25,14 +25,12 @@ public class FaculdadeController {
 
     @GetMapping
     public String loadListing(Model model) {
-        System.out.println("[Carômetro] -- Carregando página listagem de faculdade");
         model.addAttribute("faculdades", faculdadeServiceImpl.getAll());
         return "faculdade/listing";
     }
 
     @GetMapping("/novo")
     public String loadNewFaculdadePage(Model model) {
-        System.out.println("[Carômetro] -- Carregando página de nova faculdade");
         model.addAttribute("faculdade", new CreateFaculdadeDto(List.of(), "", LocalDate.now()));
         model.addAttribute("cursos", cursoServiceImpl.getAll());
 
@@ -52,22 +50,20 @@ public class FaculdadeController {
 
     @PostMapping
     public String saveFaculdade(@ModelAttribute CreateFaculdadeDto dto) {
-        System.out.println("[Carômetro] -- Salvando nova Faculdade");
         FaculdadeDto saved = faculdadeServiceImpl.save(dto);
-        System.out.println("[Carômetro] -- Salvo como: \n\t" + saved);
-        return "redirect:faculdades";
+        return "redirect:/faculdades";
     }
 
     @PutMapping
     public String updateFaculdade(@ModelAttribute UpdateFaculdadeDto dto) {
         faculdadeServiceImpl.update(dto);
-        return "redirect:faculdades";
+        return "redirect:/faculdades";
     }
 
     @DeleteMapping
     public String deleteFaculdade(Long id) {
         faculdadeServiceImpl.delete(id);
-        return "redirect:faculdades";
+        return "redirect:/faculdades";
     }
 
 }
