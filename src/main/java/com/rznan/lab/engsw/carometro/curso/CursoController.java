@@ -89,7 +89,7 @@ public class CursoController {
         if (result.hasErrors()) {
             model.addAttribute("todasFaculdades", faculdadeServiceImpl.getAll());
             model.addAttribute("todosAlunos", alunoServiceImpl.getAll());
-            return "curso/registry";
+            return "curso/update";
         }
         try {
             cursoServiceImpl.update(dto);

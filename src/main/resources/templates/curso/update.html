@@ -42,7 +42,7 @@
             </div>
 
             <div class="mb-4">
-                <label for="alunos" class="form-label">Alunos</label>
+                <label class="form-label">Alunos</label>
                 <select name="alunos" multiple class="form-select" th:field="*{alunosId}">
                     <option th:each="aluno : ${todosAlunos}"
                             th:value="${aluno.id}"
