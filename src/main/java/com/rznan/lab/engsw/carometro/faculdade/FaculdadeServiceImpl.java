@@ -74,7 +74,9 @@ public class FaculdadeServiceImpl implements IFaculdadeService {
         Faculdade faculdade = repository.getReferenceById(dto.id());
         faculdade.update(dto);
 
-        faculdade.getCursos().forEach(faculdade::removeCurso);
+        faculdade.getCursos().forEach(c -> c.setFaculdade(null));
+        faculdade.getCursos().clear();
+
         cursoService.getCursosByIds(dto.cursoIds()).forEach(faculdade::addCurso);
         repository.save(faculdade);
     }
