@@ -44,7 +44,7 @@ public class FaculdadeController {
             return "redirect:faculdades";
         }
         model.addAttribute("faculdade", dto);
-        model.addAttribute("cursos", cursoServiceImpl.getAll());
+        model.addAttribute("todosCursos", cursoServiceImpl.getAll());
         return "faculdade/update";
     }
 
