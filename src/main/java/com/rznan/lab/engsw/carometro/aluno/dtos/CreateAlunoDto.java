@@ -2,14 +2,14 @@ package com.rznan.lab.engsw.carometro.aluno.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 
+import java.time.LocalDate;
+
 public record CreateAlunoDto(
-        @NotBlank
+
         long idCurso,
-        @NotBlank
-        long idFaculdade,
         String ra,
         String nome,
-        int anoEntrada,
+        LocalDate anoEntrada,
         String historico,
         String comentarioFaculdade,
         String comentarioLivre

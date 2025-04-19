@@ -1,11 +1,16 @@
 package com.rznan.lab.engsw.carometro.faculdade.dtos;
 
+
 import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 
 import java.time.LocalDate;
 import java.util.List;
 
 public record CreateFaculdadeDto(
+
 
         @NotNull(message = "A lista de cursos não pode ser nula")
         List<@NotNull(message = "ID de curso não pode ser nulo") Long> cursoIds,

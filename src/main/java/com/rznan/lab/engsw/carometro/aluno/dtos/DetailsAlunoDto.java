@@ -4,6 +4,8 @@ import com.rznan.lab.engsw.carometro.aluno.Aluno;
 import com.rznan.lab.engsw.carometro.curso.dtos.CursoDto;
 import jakarta.validation.constraints.NotBlank;
 
+import java.time.LocalDate;
+
 public record DetailsAlunoDto(
         @NotBlank
         long id,
@@ -11,7 +13,7 @@ public record DetailsAlunoDto(
         CursoDto curso,
         String ra,
         String nome,
-        int anoEntrada,
+        LocalDate anoEntrada,
         String historico,
         String comentarioFaculdade,
         String comentarioLivre

@@ -7,6 +7,8 @@ import com.rznan.lab.engsw.carometro.faculdade.Faculdade;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Table(name = "aluno")
 @Entity(name = "aluno")
 @NoArgsConstructor
@@ -27,7 +29,7 @@ public class Aluno {
 
     private String ra;
     private String nome;
-    private int anoEntrada;
+    private LocalDate anoEntrada;
     private String historico;
     private String comentarioFaculdade;
     private String comentarioLivre;

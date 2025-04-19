@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Alunos</title>
+</head>
+<body>
+<section layout:fragment="conteudo">
+    <div class="container">
+        <h1>Alunos</h1>
+        <a href="/alunos/novo" class="btn btn-primary">Incluir Aluno</a>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>RA</th>
+                <th>Nome</th>
+                <th>Ano de Entrada</th>
+                <th>Histórico</th>
+                <th>Comentario Faculdade</th>
+                <th>Comentario Livre</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="aluno : ${alunos}">
+                <td th:text="${aluno.id}">1</td>
+                <td th:text="${aluno.ra}">1</td>
+                <td th:text="${aluno.nome}">Nome do Aluno</td>
+                <td th:text="${#temporals.format(aluno.anoEntrada, 'dd/MM/yyyy')}">01/01/2000</td>
+                <td th:text="${aluno.historico}">historico</td>
+                <td th:text="${aluno.comentarioFaculdade}">Comentario Faculdade</td>
+                <td th:text="${aluno.comentarioLivre}">Comentario Livre</td>
+                <td>
+                    <a th:href="@{/alunos/{id}/editar(id=${aluno.id})}" class="btn btn-sm btn-warning">Editar</a>
+                    <form th:action="@{/alunos}" method="post" style="display:inline;">
+                        <input type="hidden" name="_method" value="delete">
+                        <input type="hidden" name="id" th:value="${aluno.id}">
+                        <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+</body>
+</html>

@@ -3,6 +3,8 @@ package com.rznan.lab.engsw.carometro.aluno.dtos;
 import com.rznan.lab.engsw.carometro.aluno.Aluno;
 import jakarta.validation.constraints.NotBlank;
 
+import java.time.LocalDate;
+
 public record AlunoDto(
         @NotBlank
         long id,
@@ -14,7 +16,7 @@ public record AlunoDto(
         String nomeFaculdade,
         String ra,
         String nome,
-        int anoEntrada,
+        LocalDate anoEntrada,
         String historico,
         String comentarioFaculdade,
         String comentarioLivre

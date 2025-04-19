@@ -2,6 +2,8 @@ package com.rznan.lab.engsw.carometro.aluno.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 
+import java.time.LocalDate;
+
 public record UpdateAlunoDto(
         @NotBlank
         long id,
@@ -9,7 +11,7 @@ public record UpdateAlunoDto(
         long idCurso,
         String ra,
         String nome,
-        int anoEntrada,
+        LocalDate anoEntrada,
         String historico,
         String comentarioFaculdade,
         String comentarioLivre
