@@ -44,7 +44,7 @@ public class Faculdade {
     }
 
     public void removeCurso(Curso curso) {
-        cursos.remove(curso);
         curso.setFaculdade(null);
+        cursos.remove(curso);
     }
 }

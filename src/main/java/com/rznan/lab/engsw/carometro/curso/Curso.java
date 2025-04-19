@@ -41,4 +41,14 @@ public class Curso {
         this.titulo = dados.titulo();
         this.inauguracao = dados.inauguracao();
     }
+
+    public void addAluno(Aluno aluno) {
+        aluno.setCurso(this);
+        alunos.add(aluno);
+    }
+
+    public void removeAluno(Aluno aluno) {
+        aluno.setCurso(null);
+        alunos.remove(aluno);
+    }
 }
