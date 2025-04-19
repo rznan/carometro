@@ -86,7 +86,7 @@ public class CursoController {
     }
 
     @DeleteMapping
-    public String deleteFaculdade(Long id) {
+    public String deleteCurso(Long id) {
         cursoServiceImpl.delete(id);
         return "redirect:/cursos";
     }
