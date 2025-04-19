@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Table(name = "faculdade")
@@ -31,6 +32,7 @@ public class Faculdade {
     public Faculdade(CreateFaculdadeDto dto) {
         this.nome = dto.nome();
         this.inauguracao = dto.inauguracao();
+        this.cursos = new ArrayList<>();
     }
 
     public void update(UpdateFaculdadeDto dto) {

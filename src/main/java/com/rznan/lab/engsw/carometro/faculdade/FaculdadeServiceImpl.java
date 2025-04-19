@@ -62,7 +62,7 @@ public class FaculdadeServiceImpl implements IFaculdadeService {
         if (dto == null) return null;
 
         Faculdade faculdade = new Faculdade(dto);
-        faculdade.setCursos(cursoService.getCursosByIds(dto.cursoIds()));
+        cursoService.getCursosByIds(dto.cursoIds()).forEach(faculdade::addCurso);
 
         return new FaculdadeDto(repository.save(faculdade));
     }
@@ -84,6 +84,8 @@ public class FaculdadeServiceImpl implements IFaculdadeService {
     @Override
     @Transactional
     public void delete(Long id) {
+        Faculdade faculdade = repository.getReferenceById(id);
+        faculdade.getCursos().forEach(c -> c.setFaculdade(null));
         repository.deleteById(id);
     }
 }

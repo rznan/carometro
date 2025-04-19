@@ -1,7 +1,6 @@
 package com.rznan.lab.engsw.carometro.curso;
 
 import com.rznan.lab.engsw.carometro.aluno.Aluno;
-import com.rznan.lab.engsw.carometro.aluno.dtos.UpdateAlunoDto;
 import com.rznan.lab.engsw.carometro.curso.dtos.CreateCursoDto;
 import com.rznan.lab.engsw.carometro.curso.dtos.UpdateCursoDto;
 import com.rznan.lab.engsw.carometro.faculdade.Faculdade;
@@ -9,6 +8,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Table(name = "curso")
@@ -35,6 +35,7 @@ public class Curso {
     public Curso(CreateCursoDto dados) {
         this.titulo = dados.titulo();
         this.inauguracao = dados.inauguracao();
+        this.alunos = new ArrayList<>();
     }
 
     public void update(UpdateCursoDto dados) {

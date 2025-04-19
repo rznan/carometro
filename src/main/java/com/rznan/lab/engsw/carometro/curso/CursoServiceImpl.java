@@ -71,7 +71,7 @@ public class CursoServiceImpl implements ICursoService {
         if (dto == null) return null;
 
         Curso curso = new Curso(dto);
-        curso.setAlunos(alunoService.getAlunosByIds(dto.alunosId()));
+        alunoService.getAlunosByIds(dto.alunosId()).forEach(curso::addAluno);
         curso.setFaculdade(resolveFaculdade(dto.faculdadeId()));
 
         return new CursoDto(repository.save(curso));
@@ -89,7 +89,8 @@ public class CursoServiceImpl implements ICursoService {
         }
 
         curso.update(dto);
-        curso.setAlunos(alunoService.getAlunosByIds(dto.alunosId()));
+        curso.getAlunos().forEach(a -> a.setCurso(null));
+        alunoService.getAlunosByIds(dto.alunosId()).forEach(curso::addAluno);
         curso.setFaculdade(resolveFaculdade(dto.faculdadeId()));
 
         repository.save(curso);
@@ -98,6 +99,8 @@ public class CursoServiceImpl implements ICursoService {
     @Override
     @Transactional
     public void delete(Long id) {
+        Curso curso = repository.getReferenceById(id);
+        curso.getAlunos().forEach(a -> a.setCurso(null));
         repository.deleteById(id);
     }
 
