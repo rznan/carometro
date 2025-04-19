@@ -18,9 +18,7 @@
             <div class="mb-3">
                 <label for="titulo" class="form-label">Nome do Curso</label>
                 <input type="text" id="titulo" class="form-control" th:field="*{titulo}" required>
-                <div class="invalid-feedback">
-                    Por favor, informe o titulo do curso.
-                </div>
+                <div class="text-danger" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></div>
             </div>
 
             <div class="mb-3">
@@ -28,6 +26,7 @@
                 <input type="date" name="inauguracao"
                        class="form-control"
                        th:value="${#temporals.format(curso.inauguracao, 'yyyy-MM-dd')}" required>
+                <div class="text-danger" th:if="${#fields.hasErrors('inauguracao')}" th:errors="*{inauguracao}"></div>
             </div>
 
             <div class="mb-4">
@@ -39,6 +38,7 @@
                             th:text="${faculdadeI.nome}">
                     </option>
                 </select>
+                <div class="text-danger" th:if="${#fields.hasErrors('faculdadeId')}" th:errors="*{faculdadeId}"></div>
             </div>
 
             <div class="mb-4">
@@ -51,6 +51,7 @@
                     </option>
                 </select>
                 <div class="form-text">Segure Ctrl (ou Command) para selecionar mais de um curso.</div>
+                <div class="text-danger" th:if="${#fields.hasErrors('alunosId')}" th:errors="*{alunosId}"></div>
             </div>
 
             <button type="submit" class="btn btn-primary">Salvar Alterações</button>
@@ -58,21 +59,5 @@
         </form>
     </div>
 </section>
-<script>
-    // Validação de formulário com Bootstrap
-    (function () {
-        'use strict'
-        const forms = document.querySelectorAll('.needs-validation')
-        Array.from(forms).forEach(function (form) {
-            form.addEventListener('submit', function (event) {
-                if (!form.checkValidity()) {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
-                form.classList.add('was-validated')
-            }, false)
-        })
-    })()
-</script>
 </body>
 </html>

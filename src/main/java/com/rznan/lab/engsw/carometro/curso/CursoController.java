@@ -7,11 +7,15 @@ import com.rznan.lab.engsw.carometro.curso.dtos.CursoDto;
 import com.rznan.lab.engsw.carometro.curso.dtos.DetailsCursoDto;
 import com.rznan.lab.engsw.carometro.curso.dtos.UpdateCursoDto;
 import com.rznan.lab.engsw.carometro.faculdade.IFaculdadeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -29,9 +33,11 @@ public class CursoController {
     @Lazy @Autowired
     private IFaculdadeService faculdadeServiceImpl;
 
+    private static final Logger logger = LoggerFactory.getLogger(CursoController.class);
+
     @GetMapping
     public String loadListing(Model model) {
-        System.out.println("[Carômetro] -- Carregando página de Listagem de cursos");
+        logger.info("[Carômetro] -- Carregando página de Listagem de cursos");
         model.addAttribute("cursos", cursoServiceImpl.getAll());
         return  "curso/listing";
     }
@@ -64,23 +70,31 @@ public class CursoController {
     }
 
     @PostMapping
-    public String saveCurso(@ModelAttribute CreateCursoDto dto) {
+    public String saveCurso(@Valid @ModelAttribute("curso") CreateCursoDto dto, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("todasFaculdades", faculdadeServiceImpl.getAll());
+            model.addAttribute("todosAlunos", alunoServiceImpl.getAll());
+            return "curso/registry";
+        }
         try {
             CursoDto saved = cursoServiceImpl.save(dto);
         } catch (Exception e) {
-            System.err.println("Não foi possível salvar o curso:\n\t" + dto);
-            System.err.println(e.getMessage());
+            logger.error("Erro ao salvar curso", e);
         }
         return "redirect:/cursos";
     }
 
     @PutMapping
-    public String updateCurso(@ModelAttribute UpdateCursoDto dto) {
+    public String updateCurso(@Valid @ModelAttribute("curso") UpdateCursoDto dto, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("todasFaculdades", faculdadeServiceImpl.getAll());
+            model.addAttribute("todosAlunos", alunoServiceImpl.getAll());
+            return "curso/registry";
+        }
         try {
             cursoServiceImpl.update(dto);
         } catch (Exception e) {
-            System.err.println("Não foi possível atualizar o curso:\n\t" + dto);
-            System.err.println(e.getMessage());
+            logger.error("Erro ao atualizar curso", e);
         }
         return "redirect:/cursos";
     }
