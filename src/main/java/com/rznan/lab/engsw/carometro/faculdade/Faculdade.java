@@ -37,4 +37,14 @@ public class Faculdade {
         this.nome = dto.nome();
         this.inauguracao = dto.inauguracao();
     }
+
+    public void addCurso(Curso curso) {
+        cursos.add(curso);
+        curso.setFaculdade(this);
+    }
+
+    public void removeCurso(Curso curso) {
+        cursos.remove(curso);
+        curso.setFaculdade(null);
+    }
 }

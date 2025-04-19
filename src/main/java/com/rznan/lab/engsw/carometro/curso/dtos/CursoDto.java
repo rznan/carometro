@@ -14,8 +14,8 @@ public record CursoDto(
     public CursoDto(Curso curso) {
             this(
                 curso.getId(),
-                curso.getFaculdade().getId(),
-                curso.getFaculdade().getNome(),
+                curso.getFaculdade() != null ? curso.getFaculdade().getId() : -1,
+                curso.getFaculdade() != null ? curso.getFaculdade().getNome() : "sem faculdade",
                 curso.getTitulo(),
                 curso.getInauguracao()
         );

@@ -1,14 +1,17 @@
 package com.rznan.lab.engsw.carometro.faculdade;
 
 import com.rznan.lab.engsw.carometro.curso.ICursoService;
+import com.rznan.lab.engsw.carometro.curso.dtos.CursoDto;
 import com.rznan.lab.engsw.carometro.faculdade.dtos.CreateFaculdadeDto;
 import com.rznan.lab.engsw.carometro.faculdade.dtos.DetailsFaculdadeDto;
 import com.rznan.lab.engsw.carometro.faculdade.dtos.FaculdadeDto;
 import com.rznan.lab.engsw.carometro.faculdade.dtos.UpdateFaculdadeDto;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -43,19 +46,34 @@ public class FaculdadeController {
         if (dto == null) {
             return "redirect:faculdades";
         }
-        model.addAttribute("faculdade", dto);
+        UpdateFaculdadeDto nDto = new UpdateFaculdadeDto(
+                dto.id(),
+                dto.cursos().stream().map(CursoDto::id).toList(),
+                dto.nome(),
+                dto.inauguracao());
+        model.addAttribute("faculdade", nDto);
         model.addAttribute("todosCursos", cursoServiceImpl.getAll());
         return "faculdade/update";
     }
 
     @PostMapping
-    public String saveFaculdade(@ModelAttribute CreateFaculdadeDto dto) {
+    public String saveFaculdade(@Valid @ModelAttribute("faculdade") CreateFaculdadeDto dto, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("faculdade", dto);
+            model.addAttribute("cursos", cursoServiceImpl.getAll());
+            return "faculdade/registry"; // volta para a tela de cadastro com os erros
+        }
         FaculdadeDto saved = faculdadeServiceImpl.save(dto);
         return "redirect:/faculdades";
     }
 
     @PutMapping
-    public String updateFaculdade(@ModelAttribute UpdateFaculdadeDto dto) {
+    public String updateFaculdade(@Valid @ModelAttribute("faculdade") UpdateFaculdadeDto dto, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("faculdade", dto);
+            model.addAttribute("todosCursos", cursoServiceImpl.getAll());
+            return "faculdade/update";
+        }
         faculdadeServiceImpl.update(dto);
         return "redirect:/faculdades";
     }

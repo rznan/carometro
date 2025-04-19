@@ -16,17 +16,13 @@
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome da Faculdade</label>
                 <input type="text" id="nome" class="form-control" th:field="*{nome}" required>
-                <div class="invalid-feedback">
-                    Por favor, informe o nome da faculdade.
-                </div>
+                <div class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
             </div>
 
             <div class="mb-3">
                 <label for="inauguracao" class="form-label">Data de Inauguração</label>
                 <input type="date" id="inauguracao" class="form-control" th:field="*{inauguracao}" required>
-                <div class="invalid-feedback">
-                    Por favor, informe a data de inauguração.
-                </div>
+                <div class="text-danger" th:if="${#fields.hasErrors('inauguracao')}" th:errors="*{inauguracao}"></div>
             </div>
 
             <div class="mb-4">
@@ -38,6 +34,7 @@
                     </option>
                 </select>
                 <div class="form-text">Segure Ctrl (ou Command) para selecionar mais de um curso.</div>
+                <div class="text-danger" th:if="${#fields.hasErrors('cursoIds')}" th:errors="*{cursoIds}"></div>
             </div>
 
             <button type="submit" class="btn btn-primary">Cadastrar</button>
@@ -45,21 +42,5 @@
         </form>
     </div>
 </section>
-<script>
-    // Validação de formulário com Bootstrap
-    (function () {
-        'use strict'
-        const forms = document.querySelectorAll('.needs-validation')
-        Array.from(forms).forEach(function (form) {
-            form.addEventListener('submit', function (event) {
-                if (!form.checkValidity()) {
-                    event.preventDefault()
-                    event.stopPropagation()
-                }
-                form.classList.add('was-validated')
-            }, false)
-        })
-    })()
-</script>
 </body>
 </html>

@@ -71,15 +71,12 @@ public class FaculdadeServiceImpl implements IFaculdadeService {
     @Transactional
     public void update(UpdateFaculdadeDto dto) {
         if (dto == null) return;
-
-        Faculdade faculdade = repository.findById(dto.id()).orElse(null);
-        if (faculdade == null) {
-            System.err.println("Faculdade não encontrada. ID: " + dto.id());
-            return;
-        }
-
+        Faculdade faculdade = repository.getReferenceById(dto.id());
         faculdade.update(dto);
-        faculdade.setCursos(cursoService.getCursosByIds(dto.cursoIds()));
+
+        faculdade.getCursos().forEach(faculdade::removeCurso);
+        cursoService.getCursosByIds(dto.cursoIds()).forEach(faculdade::addCurso);
+        repository.save(faculdade);
     }
 
     @Override

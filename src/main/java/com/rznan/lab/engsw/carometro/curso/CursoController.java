@@ -60,7 +60,7 @@ public class CursoController {
         UpdateCursoDto dto = new UpdateCursoDto(
                 tempDto.id(),
                 tempDto.alunos().stream().map(AlunoDto::idCurso).toList(),
-                tempDto.faculdade().id(),
+                tempDto.faculdade() != null ? tempDto.faculdade().id() : -1,
                 tempDto.titulo(),
                 tempDto.inauguracao());
         model.addAttribute("curso", dto);

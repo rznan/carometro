@@ -18,7 +18,7 @@ public record DetailsCursoDto(
             this(
                 curso.getId(),
                 curso.getAlunos().stream().map(AlunoDto::new).toList(),
-                new FaculdadeDto(curso.getFaculdade()),
+                curso.getFaculdade() != null ? new FaculdadeDto(curso.getFaculdade()) : null,
                 curso.getTitulo(),
                 curso.getInauguracao()
         );

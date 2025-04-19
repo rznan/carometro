@@ -20,6 +20,7 @@
             <div class="mb-3">
                 <label class="form-label">Nome da Faculdade</label>
                 <input type="text" class="form-control" th:field="*{nome}" required />
+                <div class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
             </div>
 
             <div class="mb-3">
@@ -27,14 +28,15 @@
                 <input type="date" name="inauguracao"
                        class="form-control"
                        th:value="${#temporals.format(faculdade.inauguracao, 'yyyy-MM-dd')}" required>
+                <div class="text-danger" th:if="${#fields.hasErrors('inauguracao')}" th:errors="*{inauguracao}"></div>
             </div>
 
             <div class="mb-4">
                 <label class="form-label">Cursos Associados</label>
-                <select multiple class="form-select" name="cursoIds">
+                <select multiple class="form-select" th:field="*{cursoIds}">
                     <option th:each="curso : ${todosCursos}"
                             th:value="${curso.id}"
-                            th:selected="${#lists.contains(faculdade.cursos, curso)}"
+                            th:selected="${#lists.contains(faculdade.cursoIds, curso.id)}"
                             th:text="${curso.titulo + ' (' + curso.faculdadeNome + ')'}">
                     </option>
                 </select>
