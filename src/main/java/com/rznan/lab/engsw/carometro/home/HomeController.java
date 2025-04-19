@@ -5,7 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class homeController {
+public class HomeController {
 
     @RequestMapping("/")
     public String carregarHome(Model model) {
