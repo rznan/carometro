@@ -44,8 +44,10 @@
             </div>
 
             <div class="mb-3">
-                <label for="anoEntrada" class="form-label">Data de Entrada</label>
-                <input type="date" id="anoEntrada" class="form-control" th:field="*{anoEntrada}" required>
+                <label  class="form-label">Data de Entrada</label>
+                <input type="date" name="anoEntrada"
+                       class="form-control"
+                       th:value="${#temporals.format(aluno.anoEntrada, 'yyyy-MM-dd')}" required>
                 <div class="invalid-feedback">
                     Por favor, informe a data de Entrada.
                 </div>

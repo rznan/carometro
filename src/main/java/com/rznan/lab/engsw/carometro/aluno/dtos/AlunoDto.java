@@ -6,12 +6,12 @@ import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 public record AlunoDto(
-        @NotBlank
+
         long id,
-        @NotBlank
+
         long idCurso,
         String tituloCurso,
-        @NotBlank
+
         long idFaculdade,
         String nomeFaculdade,
         String ra,

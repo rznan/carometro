@@ -5,9 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 public record UpdateAlunoDto(
-        @NotBlank
+
         long id,
-        long idFaculdade,
         long idCurso,
         String ra,
         String nome,

@@ -7,9 +7,9 @@ import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 public record DetailsAlunoDto(
-        @NotBlank
+
         long id,
-        @NotBlank
+
         CursoDto curso,
         String ra,
         String nome,
