@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}">
+<head>
+    <title>Cadastrar Curso</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<section layout:fragment="conteudo">
+    <div class="container mt-5">
+        <h2 class="mb-4">Cadastro de Curso</h2>
+
+        <form th:action="@{/cursos}" th:object="${curso}" method="post" class="needs-validation">
+            <input type="hidden" name="_method" value="put" />
+            <input type="hidden" th:field="*{id}" />
+            <div class="mb-3">
+                <label for="titulo" class="form-label">Nome do Curso</label>
+                <input type="text" id="titulo" class="form-control" th:field="*{titulo}" required>
+                <div class="invalid-feedback">
+                    Por favor, informe o titulo do curso.
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Data de Inauguração</label>
+                <input type="date" name="inauguracao"
+                       class="form-control"
+                       th:value="${#temporals.format(curso.inauguracao, 'yyyy-MM-dd')}" required>
+            </div>
+
+            <div class="mb-4">
+                <label for="faculdades" class="form-label">Faculdades Disponíveis</label>
+                <select id="faculdades" class="form-select" th:field="*{faculdadeId}">
+                    <option th:each="faculdadeI : ${todasFaculdades}"
+                            th:value="${faculdadeI.id}"
+                            th:selected="${faculdadeId == faculdadeI.id}"
+                            th:text="${faculdadeI.nome}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label for="alunos" class="form-label">Alunos</label>
+                <select name="alunos" multiple class="form-select" th:field="*{alunosId}">
+                    <option th:each="aluno : ${todosAlunos}"
+                            th:value="${aluno.id}"
+                            th:selected="${#lists.contains(curso.alunosId, aluno.id)}"
+                            th:text="${aluno.ra} + '| ' + ${aluno.nome}">
+                    </option>
+                </select>
+                <div class="form-text">Segure Ctrl (ou Command) para selecionar mais de um curso.</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+            <a th:href="@{/cursos}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</section>
+<script>
+    // Validação de formulário com Bootstrap
+    (function () {
+        'use strict'
+        const forms = document.querySelectorAll('.needs-validation')
+        Array.from(forms).forEach(function (form) {
+            form.addEventListener('submit', function (event) {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+</script>
+</body>
+</html>
