@@ -24,10 +24,10 @@ public record AlunoDto(
         public AlunoDto(Aluno a) {
                 this(
                         a.getId(),
-                        a.getCurso().getId(),
-                        a.getCurso().getTitulo(),
-                        a.getCurso().getFaculdade().getId(),
-                        a.getCurso().getFaculdade().getNome(),
+                        a.getCurso() != null ? a.getCurso().getId() : -1,
+                        a.getCurso() != null ? a.getCurso().getTitulo() : "Não encontrado",
+                        a.getCurso() != null ? a.getCurso().getFaculdade() != null ? a.getCurso().getFaculdade().getId() : -1 : -1,
+                        a.getCurso() != null ? a.getCurso().getFaculdade() != null ? a.getCurso().getFaculdade().getNome() : "Faculdade não encontrada" : "Curso não encontrado",
                         a.getRa(),
                         a.getNome(),
                         a.getAnoEntrada(),

@@ -18,13 +18,12 @@
 
             <div class="mb-4">
                 <label for="cursos" class="form-label">Cursos Disponíveis</label>
-                <select id="cursos" multiple class="form-select" th:field="*{idCurso}">
+                <select id="cursos" class="form-select" th:field="*{idCurso}">
                     <option th:each="curso : ${cursos}"
                             th:value="${curso.id}"
                             th:text="${curso.titulo} + ' (' + ${curso.faculdadeNome} + ')'">
                     </option>
                 </select>
-                <div class="form-text">Segure Ctrl (ou Command) para selecionar mais de um curso.</div>
             </div>
 
             <div class="mb-3">

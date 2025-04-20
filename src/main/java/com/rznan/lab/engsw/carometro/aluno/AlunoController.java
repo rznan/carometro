@@ -18,6 +18,7 @@ import java.time.LocalDate;
 @Controller
 @RequestMapping("/alunos")
 public class AlunoController {
+
     @Lazy @Autowired
     IAlunoService alunoServiceImpl;
     @Lazy @Autowired
@@ -41,6 +42,7 @@ public class AlunoController {
 
     @PostMapping
     public String saveAluno(@ModelAttribute CreateAlunoDto dto) throws Exception {
+        System.out.println(dto);
         AlunoDto saved = alunoServiceImpl.save(dto);
         return "redirect:/alunos";
     }
@@ -81,10 +83,4 @@ public class AlunoController {
         alunoServiceImpl.delete(id);
         return "redirect:/alunos";
     }
-
-
-
-
-
-    
 }

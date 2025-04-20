@@ -21,7 +21,7 @@ public record DetailsAlunoDto(
         public DetailsAlunoDto(Aluno a) {
                 this(
                         a.getId(),
-                        new CursoDto(a.getCurso()),
+                        a.getCurso() != null ? new CursoDto(a.getCurso()) : null,
                         a.getRa(),
                         a.getNome(),
                         a.getAnoEntrada(),
