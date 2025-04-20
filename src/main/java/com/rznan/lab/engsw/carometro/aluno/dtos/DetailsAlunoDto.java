@@ -9,7 +9,6 @@ import java.time.LocalDate;
 public record DetailsAlunoDto(
 
         long id,
-
         CursoDto curso,
         String ra,
         String nome,

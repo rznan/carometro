@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Ver Alunos</title>
+</head>
+<body>
+<section layout:fragment="conteudo">
+    <div class="container">
+        <h1>Alunos</h1>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>RA</th>
+                <th>Nome</th>
+                <th>Curso</th>
+                <th>Faculdade</th>
+                <th>Ano de Entrada</th>
+                <th>Comentário Faculdade</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="aluno : ${alunos}">
+                <td th:text="${aluno.id}">1</td>
+                <td th:text="${aluno.ra}">1</td>
+                <td th:text="${aluno.nome}">Nome do Aluno</td>
+                <td th:text="${aluno.tituloCurso}">Curso</td>
+                <td th:text="${aluno.nomeFaculdade}">Faculdade</td>
+                <td th:text="${#temporals.format(aluno.anoEntrada, 'dd/MM/yyyy')}">01/01/2000</td>
+                <td th:text="${aluno.comentarioFaculdade}">Comentario Faculdade</td>
+                <td>
+                    <a th:href="@{/alunos/{id}/detalhes(id=${aluno.id})}" class="btn btn-sm btn-warning">Detalhes</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+</body>
+</html>

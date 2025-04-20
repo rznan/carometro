@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes do Aluno</title>
+    <link rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}">
+</head>
+<style>
+</style>
+<body>
+<section layout:fragment="conteudo">
+    <div class="container d-flex justify-content-center align-items-start">
+        <div>
+            <h1>Detalhes do Aluno</h1>
+
+            <div class="card " >
+                <h2 th:text="${aluno.nome}">Nome do Aluno</h2>
+
+                <p><strong>RA:</strong> <span th:text="${aluno.ra}">123456</span></p>
+                <p><strong>Ano de Entrada:</strong>
+                    <span th:text="${#temporals.format(aluno.anoEntrada, 'dd/MM/yyyy')}">01/01/2020</span>
+                </p>
+                <p><strong>Histórico:</strong> <span th:text="${aluno.historico}">Histórico do aluno...</span></p>
+                <p><strong>Comentário da Faculdade:</strong>
+                    <span th:text="${aluno.comentarioFaculdade}">Comentário da instituição</span>
+                </p>
+                <p><strong>Comentário Livre:</strong>
+                    <span th:text="${aluno.comentarioLivre}">Comentário pessoal...</span>
+                </p>
+            </div>
+
+            <div class="card" th:if="${aluno.curso != null}">
+                <h3>Curso</h3>
+                <p><strong>Título:</strong> <span th:text="${aluno.curso.titulo}">Engenharia</span></p>
+                <p><strong>Inauguração:</strong>
+                    <span th:text="${#temporals.format(aluno.curso.inauguracao, 'dd/MM/yyyy')}">01/01/2000</span>
+                </p>
+
+                <div class="nested-card">
+                    <h4>Faculdade</h4>
+                    <p><strong>Nome:</strong>
+                        <span th:text="${aluno.curso.faculdadeNome != null ? aluno.curso.faculdadeNome : 'Não informada'}">Faculdade XPTO</span>
+                    </p>
+                </div>
+            </div>
+
+            <a href="/" class="btn btn-secondary">Voltar para o Início</a>
+        </div>
+    </div>
+</section>
+</body>
+</html>

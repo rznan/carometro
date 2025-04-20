@@ -36,6 +36,12 @@ public class AlunoController {
         return "aluno/listing";
     }
 
+    @GetMapping("/ver")
+    public String loadVisualiztion(Model model) {
+        model.addAttribute("alunos", alunoServiceImpl.getAll());
+        return "aluno/visualization";
+    }
+
     @GetMapping("/novo")
     public String loadNewAlunoPage(Model model) {
         model.addAttribute("aluno", new CreateAlunoDto( 0L,"","",LocalDate.now(),"","",""));
@@ -86,5 +92,16 @@ public class AlunoController {
     public String deleteFaculdade(Long id) {
         alunoServiceImpl.delete(id);
         return "redirect:/alunos";
+    }
+
+
+    @GetMapping("{id}/detalhes")
+    public String loadDetalhesFaculdadePage(@PathVariable Long id, Model model) {
+        DetailsAlunoDto dto = alunoServiceImpl.getById(id);
+        if (dto == null) {
+            return "redirect:alunos";
+        }
+        model.addAttribute("aluno", dto);
+        return "aluno/details";
     }
 }
