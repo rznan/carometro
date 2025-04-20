@@ -26,7 +26,7 @@
             </div>
 
             <div class="mb-4">
-                <label for="faculdades" class="form-label">Cursos Disponíveis</label>
+                <label for="faculdades" class="form-label">Faculdades Disponíveis</label>
                 <select id="faculdades" class="form-select" th:field="*{faculdadeId}">
                     <option th:each="faculdade : ${todasFaculdades}"
                             th:value="${faculdade.id}"
