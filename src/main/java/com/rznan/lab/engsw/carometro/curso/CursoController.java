@@ -37,7 +37,6 @@ public class CursoController {
 
     @GetMapping
     public String loadListing(Model model) {
-        logger.info("[Carômetro] -- Carregando página de Listagem de cursos");
         model.addAttribute("cursos", cursoServiceImpl.getAll());
         return  "curso/listing";
     }
@@ -78,6 +77,7 @@ public class CursoController {
         }
         try {
             CursoDto saved = cursoServiceImpl.save(dto);
+            logger.info("[Carômetro] -- curso salvo como: " + saved);
         } catch (Exception e) {
             logger.error("Erro ao salvar curso", e);
         }

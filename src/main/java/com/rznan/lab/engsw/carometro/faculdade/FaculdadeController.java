@@ -1,5 +1,6 @@
 package com.rznan.lab.engsw.carometro.faculdade;
 
+import com.rznan.lab.engsw.carometro.curso.CursoController;
 import com.rznan.lab.engsw.carometro.curso.ICursoService;
 import com.rznan.lab.engsw.carometro.curso.dtos.CursoDto;
 import com.rznan.lab.engsw.carometro.faculdade.dtos.CreateFaculdadeDto;
@@ -7,6 +8,8 @@ import com.rznan.lab.engsw.carometro.faculdade.dtos.DetailsFaculdadeDto;
 import com.rznan.lab.engsw.carometro.faculdade.dtos.FaculdadeDto;
 import com.rznan.lab.engsw.carometro.faculdade.dtos.UpdateFaculdadeDto;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
@@ -25,6 +28,8 @@ public class FaculdadeController {
     private IFaculdadeService faculdadeServiceImpl;
     @Lazy @Autowired
     private ICursoService cursoServiceImpl;
+
+    private static final Logger logger = LoggerFactory.getLogger(CursoController.class);
 
     @GetMapping
     public String loadListing(Model model) {
@@ -64,6 +69,7 @@ public class FaculdadeController {
             return "faculdade/registry"; // volta para a tela de cadastro com os erros
         }
         FaculdadeDto saved = faculdadeServiceImpl.save(dto);
+        logger.info("[Carômetro] -- Faculdade salva como: " + saved);
         return "redirect:/faculdades";
     }
 

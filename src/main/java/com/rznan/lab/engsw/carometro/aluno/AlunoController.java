@@ -4,8 +4,11 @@ import com.rznan.lab.engsw.carometro.aluno.dtos.AlunoDto;
 import com.rznan.lab.engsw.carometro.aluno.dtos.CreateAlunoDto;
 import com.rznan.lab.engsw.carometro.aluno.dtos.DetailsAlunoDto;
 import com.rznan.lab.engsw.carometro.aluno.dtos.UpdateAlunoDto;
+import com.rznan.lab.engsw.carometro.curso.CursoController;
 import com.rznan.lab.engsw.carometro.curso.ICursoService;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
@@ -21,19 +24,20 @@ public class AlunoController {
 
     @Lazy @Autowired
     IAlunoService alunoServiceImpl;
+
     @Lazy @Autowired
     private ICursoService cursoServiceImpl;
 
+    private static final Logger logger = LoggerFactory.getLogger(CursoController.class);
+
     @GetMapping
     public String loadListing(Model model) {
-        System.out.println("[Carômetro] -- Carregando página listagem de aluno");
         model.addAttribute("alunos", alunoServiceImpl.getAll());
         return "aluno/listing";
     }
 
     @GetMapping("/novo")
     public String loadNewAlunoPage(Model model) {
-        System.out.println("[Carômetro] -- Carregando página de nova aluno");
         model.addAttribute("aluno", new CreateAlunoDto( 0L,"","",LocalDate.now(),"","",""));
         model.addAttribute("cursos", cursoServiceImpl.getAll());
 
@@ -42,8 +46,8 @@ public class AlunoController {
 
     @PostMapping
     public String saveAluno(@ModelAttribute CreateAlunoDto dto) throws Exception {
-        System.out.println(dto);
         AlunoDto saved = alunoServiceImpl.save(dto);
+        logger.info("[Carômetro] -- Aluno salvo como: " + saved);
         return "redirect:/alunos";
     }
 
