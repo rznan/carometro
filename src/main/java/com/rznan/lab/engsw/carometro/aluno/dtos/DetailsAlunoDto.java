@@ -2,7 +2,6 @@ package com.rznan.lab.engsw.carometro.aluno.dtos;
 
 import com.rznan.lab.engsw.carometro.aluno.Aluno;
 import com.rznan.lab.engsw.carometro.curso.dtos.CursoDto;
-import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDate;
 
@@ -15,7 +14,8 @@ public record DetailsAlunoDto(
         LocalDate anoEntrada,
         String historico,
         String comentarioFaculdade,
-        String comentarioLivre
+        String comentarioLivre,
+        String imagemPerfil
 ) {
         public DetailsAlunoDto(Aluno a) {
                 this(
@@ -26,7 +26,8 @@ public record DetailsAlunoDto(
                         a.getAnoEntrada(),
                         a.getHistorico(),
                         a.getComentarioFaculdade(),
-                        a.getComentarioLivre()
+                        a.getComentarioLivre(),
+                        a.getImagemPerfil()
                 );
         }
 }

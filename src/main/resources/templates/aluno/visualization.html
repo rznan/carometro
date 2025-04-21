@@ -16,6 +16,7 @@
             <thead>
             <tr>
                 <th>ID</th>
+                <th>Foto</th>
                 <th>RA</th>
                 <th>Nome</th>
                 <th>Curso</th>
@@ -23,11 +24,15 @@
                 <th>Ano de Entrada</th>
                 <th>Comentário Faculdade</th>
                 <th>Ações</th>
+
             </tr>
             </thead>
             <tbody>
             <tr th:each="aluno : ${alunos}">
                 <td th:text="${aluno.id}">1</td>
+                <td>
+                    <img th:src="@{${aluno.imagemPerfil != null ? aluno.imagemPerfil : '/images/placeholder.jpg'}}" width="80" height="80" style="object-fit: cover; border-radius: 50%;" />
+                </td>
                 <td th:text="${aluno.ra}">1</td>
                 <td th:text="${aluno.nome}">Nome do Aluno</td>
                 <td th:text="${aluno.tituloCurso}">Curso</td>

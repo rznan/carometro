@@ -12,6 +12,7 @@ public record CreateAlunoDto(
         LocalDate anoEntrada,
         String historico,
         String comentarioFaculdade,
-        String comentarioLivre
+        String comentarioLivre,
+        String imagemPerfil
 ) {
 }

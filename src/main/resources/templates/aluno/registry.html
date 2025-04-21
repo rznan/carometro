@@ -12,7 +12,12 @@
     <div class="container mt-5">
         <h2 class="mb-4">Cadastro de Aluno</h2>
 
-        <form th:action="@{/alunos}" th:object="${aluno}" method="post" class="needs-validation" novalidate>
+        <form th:action="@{/alunos}" th:object="${aluno}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+            <div class="mb-3">
+                <label for="imagem" class="form-label">Imagem de Perfil</label>
+                <input type="file" id="imagem" name="imagem" class="form-control" accept="image/*">
+            </div>
+
             <div class="mb-4">
                 <label for="cursos" class="form-label">Cursos Disponíveis</label>
                 <select id="cursos" class="form-select" th:field="*{idCurso}">

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 
@@ -30,6 +31,7 @@ public class AlunoController {
 
     private static final Logger logger = LoggerFactory.getLogger(CursoController.class);
 
+
     @GetMapping
     public String loadListing(Model model) {
         model.addAttribute("alunos", alunoServiceImpl.getAll());
@@ -44,15 +46,15 @@ public class AlunoController {
 
     @GetMapping("/novo")
     public String loadNewAlunoPage(Model model) {
-        model.addAttribute("aluno", new CreateAlunoDto( 0L,"","",LocalDate.now(),"","",""));
+        model.addAttribute("aluno", new CreateAlunoDto( 0L,"","",LocalDate.now(),"","","",""));
         model.addAttribute("cursos", cursoServiceImpl.getAll());
 
         return "aluno/registry";
     }
 
     @PostMapping
-    public String saveAluno(@ModelAttribute CreateAlunoDto dto) throws Exception {
-        AlunoDto saved = alunoServiceImpl.save(dto);
+    public String saveAluno(@ModelAttribute CreateAlunoDto dto,@RequestParam("imagem") MultipartFile imagem) throws Exception {
+        AlunoDto saved = alunoServiceImpl.save(dto,imagem);
         logger.info("[Carômetro] -- Aluno salvo como: " + saved);
         return "redirect:/alunos";
     }
@@ -78,13 +80,14 @@ public class AlunoController {
     }
 
     @PutMapping
-    public String updateFaculdade(@Valid @ModelAttribute("aluno") UpdateAlunoDto dto, BindingResult result, Model model) throws Exception {
+    public String updateFaculdade(@Valid @ModelAttribute("aluno") UpdateAlunoDto dto, BindingResult result, Model model,@RequestParam(name = "imagem",required = false) MultipartFile imagem) throws Exception {
+
         if (result.hasErrors()) {
             model.addAttribute("aluno", dto);
             model.addAttribute("cursos", cursoServiceImpl.getAll());
             return "aluno/update";
         }
-        alunoServiceImpl.update(dto);
+        alunoServiceImpl.update(dto,imagem);
         return "redirect:/alunos";
     }
 

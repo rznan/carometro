@@ -3,7 +3,6 @@ package com.rznan.lab.engsw.carometro.aluno;
 import com.rznan.lab.engsw.carometro.aluno.dtos.UpdateAlunoDto;
 import com.rznan.lab.engsw.carometro.aluno.dtos.CreateAlunoDto;
 import com.rznan.lab.engsw.carometro.curso.Curso;
-import com.rznan.lab.engsw.carometro.faculdade.Faculdade;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -33,6 +32,7 @@ public class Aluno {
     private String historico;
     private String comentarioFaculdade;
     private String comentarioLivre;
+    private String imagemPerfil;
 
     public Aluno(CreateAlunoDto dados) {
         this.nome = dados.nome();
@@ -41,6 +41,7 @@ public class Aluno {
         this.historico = dados.historico();
         this.comentarioFaculdade = dados.comentarioFaculdade();
         this.comentarioLivre = dados.comentarioLivre();
+        this.imagemPerfil = dados.imagemPerfil();
     }
 
     public void update(UpdateAlunoDto dados) {
