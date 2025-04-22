@@ -16,7 +16,7 @@ public record CreateFaculdadeDto(
         List<@NotNull(message = "ID de curso não pode ser nulo") Long> cursoIds,
 
         @NotBlank(message = "O nome da faculdade é obrigatório")
-        @Size(min = 5, max = 100, message = "O nome deve ter entre 3 e 100 caracteres")
+        @Size(min = 5, max = 100, message = "O nome deve ter entre 5 e 100 caracteres")
         String nome,
 
         @NotNull(message = "A data de inauguração é obrigatória")

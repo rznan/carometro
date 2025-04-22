@@ -53,9 +53,26 @@ public class AlunoController {
     }
 
     @PostMapping
-    public String saveAluno(@ModelAttribute CreateAlunoDto dto,@RequestParam("imagem") MultipartFile imagem) throws Exception {
-        AlunoDto saved = alunoServiceImpl.save(dto,imagem);
-        logger.info("[Carômetro] -- Aluno salvo como: " + saved);
+    public String saveAluno(@Valid @ModelAttribute("aluno") CreateAlunoDto dto, BindingResult result, @RequestParam("imagem")  MultipartFile imagem, Model model) throws Exception {
+        if (result.hasErrors()) {
+            model.addAttribute("aluno", dto);
+            model.addAttribute("cursos", cursoServiceImpl.getAll());
+            return "aluno/registry"; // volta para a tela de cadastro com os erros
+        }
+
+        // Valida o tamanho da imagem (1MB = 1024 * 1024 bytes)
+        if (!imagem.isEmpty() && imagem.getSize() > 1_048_576) {
+            model.addAttribute("erroImagem", "A imagem não pode exceder 1MB.");
+            model.addAttribute("aluno", dto);
+            model.addAttribute("cursos", cursoServiceImpl.getAll());
+            return "aluno/registry";
+        }
+        try {
+            AlunoDto saved = alunoServiceImpl.save(dto, imagem);
+            logger.info("[Carômetro] -- Aluno salvo como: " + saved);
+        }catch (Exception e){
+            logger.error("Erro ao salvar curso", e);
+        }
         return "redirect:/alunos";
     }
 
@@ -87,6 +104,14 @@ public class AlunoController {
             model.addAttribute("cursos", cursoServiceImpl.getAll());
             return "aluno/update";
         }
+        // Valida o tamanho da imagem (1MB = 1024 * 1024 bytes)
+        if (!imagem.isEmpty() && imagem.getSize() > 1_048_576) {
+            model.addAttribute("erroImagem", "A imagem não pode exceder 1MB.");
+            model.addAttribute("aluno", dto);
+            model.addAttribute("cursos", cursoServiceImpl.getAll());
+            return "aluno/registry";
+        }
+
         alunoServiceImpl.update(dto,imagem);
         return "redirect:/alunos";
     }

@@ -12,13 +12,14 @@
     <div class="container mt-5">
         <h2 class="mb-4">Editar Aluno</h2>
 
-        <form th:action="@{/alunos}" th:object="${aluno}" method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+        <form th:action="@{/alunos}" th:object="${aluno}" method="post" enctype="multipart/form-data" class="needs-validation" >
             <input type="hidden" name="_method" value="put" />
             <input type="hidden" th:field="*{id}" />
 
             <div class="mb-3">
                 <label for="imagem" class="form-label">Imagem de Perfil</label>
                 <input type="file" id="imagem" name="imagem" class="form-control" accept="image/*">
+                <div class="text-danger" th:if="${erroImagem}" th:text="${erroImagem}"></div>
             </div>
 
             <div class="mb-4">
@@ -29,22 +30,20 @@
                             th:text="${curso.titulo} + ' (' + ${curso.faculdadeNome} + ')'">
                     </option>
                 </select>
+                <div class="text-danger" th:if="${#fields.hasErrors('idCurso')}" th:errors="*{idCurso}"></div>
             </div>
 
             <div class="mb-3">
                 <label for="ra" class="form-label">ra do Aluno</label>
                 <input type="text" id="ra" class="form-control" th:field="*{ra}" required>
-                <div class="invalid-feedback">
-                    Por favor, informe o ra do Aluno.
-                </div>
+                <div class="text-danger" th:if="${#fields.hasErrors('ra')}" th:errors="*{ra}"></div>
+
             </div>
 
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome do Aluno</label>
                 <input type="text" id="nome" class="form-control" th:field="*{nome}" required>
-                <div class="invalid-feedback">
-                    Por favor, informe o nome do Aluno.
-                </div>
+                <div class="text-danger" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
             </div>
 
             <div class="mb-3">
@@ -52,27 +51,25 @@
                 <input type="date" name="anoEntrada"
                        class="form-control"
                        th:value="${#temporals.format(aluno.anoEntrada, 'yyyy-MM-dd')}" required>
-                <div class="invalid-feedback">
-                    Por favor, informe a data de Entrada.
-                </div>
+                <div class="text-danger" th:if="${#fields.hasErrors('anoEntrada')}" th:errors="*{anoEntrada}"></div>
             </div>
 
             <div class="mb-3">
                 <label for="historico" class="form-label">Histórico do Aluno</label>
-                <input type="text" id="historico" class="form-control" th:field="*{historico}" required>
+                <input type="text" id="historico" class="form-control" th:field="*{historico}" >
                 <div class="invalid-feedback">
                     Por favor, informe o historico.
                 </div>
             </div>
             <div class="mb-3">
                 <label for="comentarioFaculdade" class="form-label">Comentario sobre a Faculdade</label>
-                <input type="text" id="comentarioFaculdade" class="form-control" th:field="*{comentarioFaculdade}" required>
+                <input type="text" id="comentarioFaculdade" class="form-control" th:field="*{comentarioFaculdade}" >
 
             </div>
 
             <div class="mb-3">
                 <label for="comentarioLivre" class="form-label">Comentario Livre</label>
-                <input type="text" id="comentarioLivre" class="form-control" th:field="*{comentarioLivre}" required>
+                <input type="text" id="comentarioLivre" class="form-control" th:field="*{comentarioLivre}">
 
             </div>
 
