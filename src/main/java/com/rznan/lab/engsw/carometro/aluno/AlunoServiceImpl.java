@@ -45,16 +45,6 @@ public class AlunoServiceImpl implements IAlunoService {
         return getAlunosByIds(ids).stream().map(AlunoDto::new).toList();
     }
 
-    public List<Aluno> getAlunosByIds(List<Long> ids) {
-        List<Aluno> alunos = new ArrayList<>();
-        for (Long id : ids) {
-            alunoRepository
-                    .findById(id)
-                    .ifPresentOrElse(alunos::add, () -> logger.warn("Aluno não encontrado. ID: {}", id));
-        }
-        return alunos;
-    }
-
     @Override
     public DetailsAlunoDto getById(Long id) {
         Aluno aluno = getAlunoById(id);
@@ -63,6 +53,16 @@ public class AlunoServiceImpl implements IAlunoService {
 
     public Aluno getAlunoById(Long id) {
         return alunoRepository.findById(id).orElse(null);
+    }
+
+    public List<Aluno> getAlunosByIds(List<Long> ids) {
+        List<Aluno> alunos = new ArrayList<>();
+        for (Long id : ids) {
+            alunoRepository
+                    .findById(id)
+                    .ifPresentOrElse(alunos::add, () -> logger.warn("Aluno não encontrado. ID: {}", id));
+        }
+        return alunos;
     }
 
     @Override
@@ -89,19 +89,19 @@ public class AlunoServiceImpl implements IAlunoService {
         alunoRepository.save(aluno);
     }
 
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        alunoRepository.findById(id).ifPresent(a -> deleteImagemSilently(a.getImagemPerfil()));
+        alunoRepository.deleteById(id);
+    }
+
     private void addCursoToAluno(Long idCurso, Aluno aluno) throws Exception {
         Curso curso = cursoService.getCursoById(idCurso);
         if (curso == null) {
             throw new Exception("Não foi possível encontrar o curso. ID: " + idCurso);
         }
         aluno.setCurso(curso);
-    }
-
-    @Override
-    @Transactional
-    public void delete(Long id) {
-        alunoRepository.findById(id).ifPresent(a -> deleteImagemSilently(a.getImagemPerfil()));
-        alunoRepository.deleteById(id);
     }
 
     private void deleteImagemSilently(String path) {
