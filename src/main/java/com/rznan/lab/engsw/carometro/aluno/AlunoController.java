@@ -69,7 +69,7 @@ public class AlunoController {
         }
         try {
             AlunoDto saved = alunoServiceImpl.save(dto, imagem);
-            logger.info("[Carômetro] -- Aluno salvo como: " + saved);
+            logger.info("[Carômetro] -- Aluno salvo como: {}", saved);
         }catch (Exception e){
             logger.error("Erro ao salvar curso", e);
         }
@@ -97,8 +97,12 @@ public class AlunoController {
     }
 
     @PutMapping
-    public String updateFaculdade(@Valid @ModelAttribute("aluno") UpdateAlunoDto dto, BindingResult result, Model model,@RequestParam(name = "imagem",required = false) MultipartFile imagem) throws Exception {
-
+    public String updateFaculdade(
+            @Valid @ModelAttribute("aluno") UpdateAlunoDto dto,
+            BindingResult result,
+            Model model,
+            @RequestParam(name = "imagem", required = false) MultipartFile imagem
+    ) throws Exception {
         if (result.hasErrors()) {
             model.addAttribute("aluno", dto);
             model.addAttribute("cursos", cursoServiceImpl.getAll());
@@ -117,14 +121,14 @@ public class AlunoController {
     }
 
     @DeleteMapping
-    public String deleteFaculdade(Long id) {
+    public String deleteAluno(Long id) {
         alunoServiceImpl.delete(id);
         return "redirect:/alunos";
     }
 
 
     @GetMapping("{id}/detalhes")
-    public String loadDetalhesFaculdadePage(@PathVariable Long id, Model model) {
+    public String loadDetalhesAlunoPage(@PathVariable Long id, Model model) {
         DetailsAlunoDto dto = alunoServiceImpl.getById(id);
         if (dto == null) {
             return "redirect:alunos";

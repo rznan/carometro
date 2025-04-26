@@ -1,6 +1,9 @@
 package com.rznan.lab.engsw.carometro.storage;
 
 
+import com.rznan.lab.engsw.carometro.curso.CursoController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -14,12 +17,13 @@ import java.util.UUID;
 
 @Service
 @Lazy
-public class StorageServiceImpl implements IStorageService {
+public class ImageStorageServiceImpl implements IImageStorageService {
+
     @Value("${upload.dir}")
     private String uploadDir;
-    @Override
-    public String uploadFile(MultipartFile file) throws IOException {
 
+    @Override
+    public String save(MultipartFile file) throws IOException {
         String nomeArquivo = UUID.randomUUID() + "_" + file.getOriginalFilename();
         Path pasta = Paths.get(uploadDir);
         Files.createDirectories(pasta);
@@ -29,11 +33,9 @@ public class StorageServiceImpl implements IStorageService {
     }
 
     @Override
-    public void deleteFile(String path) throws IOException {
-        if (path != null && path.startsWith("/uploads/")) {
-            String nomeArquivo = path.replace("/uploads/", "");
-            Path arquivo = Paths.get(uploadDir).resolve(nomeArquivo);
-            Files.deleteIfExists(arquivo);
-        }
+    public void delete(String path) throws IOException {
+        String nomeArquivo = path.replace("/uploads/", "");
+        Path arquivo = Paths.get(uploadDir).resolve(nomeArquivo);
+        Files.deleteIfExists(arquivo);
     }
 }
