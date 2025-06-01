@@ -4,13 +4,33 @@
       layout:decorate="~{template.html}">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../static/css/style.css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" href="../static/css/home.css" th:href="@{/css/home.css}">
     <title>Carometro</title>
 </head>
 <body>
-    <div layout:fragment="conteudo">
+<section layout:fragment="conteudo">
+    <div class="container">
+        <div class="carometro-header">
+            <h1>Bem-vindo ao Carômetro da FATEC ZL</h1>
+            <br>
+            <p>Conheça os nossos alunos! Reencontre seus colegas!</p>
+        </div>
 
-
+        <div class="alunos-carousel">
+            <div th:each="aluno : ${alunos}" class="aluno-card">
+                <a th:href="@{/alunos/{id}/detalhes(id=${aluno.id})}" class="aluno-link">
+                    <div class="aluno-foto"
+                         th:style="'background-image: url(' + (@{${aluno.imagemPerfil != null ? aluno.imagemPerfil : '/images/placeholder.jpg'}}) + ')'">
+                    </div>
+                    <div class="aluno-info">
+                        <h3 th:text="${aluno.nome}" class="aluno-nome">Nome do Aluno</h3>
+                        <p th:text="${aluno.tituloCurso}" class="aluno-curso">Curso</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <a href="/alunos/ver" class="btn btn-secondary">Ver todos os alunos</a>
     </div>
+</section>
 </body>
 </html>

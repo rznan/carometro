@@ -1,0 +1,92 @@
+.container {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.carometro-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.carometro-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.carometro-header p {
+  font-size: 1rem;
+  color: #555;
+}
+
+.alunos-carousel {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  padding: 1rem;
+  scroll-snap-type: x mandatory;
+  width: 100%;
+}
+
+.aluno-card {
+  flex: 0 0 300px;
+  scroll-snap-align: start;
+  background: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 1px 4px 6px 1px rgba(0,0,0,0.60);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+.aluno-card:hover {
+  transform: scale(1.05);
+}
+
+.aluno-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.aluno-foto {
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+}
+
+.aluno-info {
+  padding: 1rem;
+  text-align: center;
+}
+
+.aluno-nome {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.aluno-curso {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.alunos-carousel::-webkit-scrollbar {
+  height: 10px;
+}
+
+.alunos-carousel::-webkit-scrollbar-track {
+  background: #ddd;
+  border-radius: 5px;
+}
+
+.alunos-carousel::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
