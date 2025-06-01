@@ -44,6 +44,12 @@ public class AlunoController {
         return "aluno/visualization";
     }
 
+    @GetMapping("/verPorCurso/{id}")
+    public String loadVisualiztionByCurso(Model model, @PathVariable long id) {
+        model.addAttribute("alunos", alunoServiceImpl.getByCursoId(id));
+        return "aluno/visualization";
+    }
+
     @GetMapping("/novo")
     public String loadNewAlunoPage(Model model) {
         model.addAttribute("aluno", new CreateAlunoDto( 0L,"","",LocalDate.now(),"","","",""));

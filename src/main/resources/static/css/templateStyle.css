@@ -1,0 +1,100 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0;
+  font-size: 60%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* Estilo do header */
+header {
+  background-color: #b20000; /* Vermelho escuro */
+  color: #ffffff;
+  padding: 1.3rem 1.2rem;
+}
+
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Navegação */
+header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.8rem;
+  margin: auto 0;
+  text-decoration: double;
+  font-size: 1rem;
+}
+
+header nav ul li a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s;
+}
+
+header nav ul li a:hover {
+  color: #93c5fd; /* Azul claro ao passar o mouse */
+}
+
+/* Distanciamento do ícone para o texto */
+header nav ul li a i {
+  margin-right: 0.5rem;
+}
+
+/* Estilo do campo de pesquisa */
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.search-container input {
+  padding: 0.5rem 2rem;
+  border-radius: 0.5rem;
+  border: none;
+}
+
+.search-container button {
+  background: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.6rem;
+}
+
+ /* Estilo do footer */
+ footer {
+   background-color: #b20000;
+   color: #ffffff;
+   text-align: center;
+   padding: 1rem 2rem;
+   margin-top: auto;
+ }
+
+ footer p {
+  margin: auto 0;
+  font-size: 1rem;
+ }
+
+
+ /* Layout principal para garantir que o footer fique na parte inferior */
+ body {
+   display: flex;
+   flex-direction: column;
+   min-height: 100vh;
+ }
+
+ main {
+   flex: 1;
+   padding: 2rem;
+   background-color: #ccbcc8;
+ }
+

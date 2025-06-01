@@ -126,4 +126,8 @@ public class AlunoServiceImpl implements IAlunoService {
             }
         }
     }
+
+    @Override
+    public List<AlunoDto> getByCursoId(long cursoId) {
+        return alunoRepository.findByCursoId(cursoId).stream().map(AlunoDto::new).toList(); }
 }

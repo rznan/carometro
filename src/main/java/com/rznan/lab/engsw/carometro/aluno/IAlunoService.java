@@ -18,4 +18,6 @@ public interface IAlunoService {
     void update(UpdateAlunoDto updateAlunoDto,MultipartFile imagemPerfil) throws Exception;
 
     void delete(Long id);
+
+    List<AlunoDto> getByCursoId(long cursoId);
 }

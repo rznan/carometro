@@ -38,6 +38,12 @@ public class CursoController {
         return  "curso/listing";
     }
 
+    @GetMapping("/ver")
+    public String loadVisualization(Model model) {
+        model.addAttribute("cursos", cursoServiceImpl.getAll());
+        return  "curso/visualization";
+    }
+
     @GetMapping("/novo")
     public String loadNewCursoPage(Model model) {
         model.addAttribute("curso", new CreateCursoDto(List.of(), "", LocalDate.now()));

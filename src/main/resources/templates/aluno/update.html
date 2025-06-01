@@ -27,7 +27,7 @@
                 <select id="cursos" class="form-select" th:field="*{idCurso}">
                     <option th:each="curso : ${cursos}"
                             th:value="${curso.id}"
-                            th:text="${curso.titulo} + ' (' + ${curso.faculdadeNome} + ')'">
+                            th:text="${curso.titulo}">
                     </option>
                 </select>
                 <div class="text-danger" th:if="${#fields.hasErrors('idCurso')}" th:errors="*{idCurso}"></div>

@@ -41,16 +41,9 @@
                 <p><strong>Inauguração:</strong>
                     <span th:text="${#temporals.format(aluno.curso.inauguracao, 'dd/MM/yyyy')}">01/01/2000</span>
                 </p>
-
-                <div class="nested-card">
-                    <h4>Faculdade</h4>
-                    <p><strong>Nome:</strong>
-                        <span th:text="${aluno.curso.faculdadeNome != null ? aluno.curso.faculdadeNome : 'Não informada'}">Faculdade XPTO</span>
-                    </p>
-                </div>
             </div>
 
-            <a href="/" class="btn btn-secondary">Voltar para o Início</a>
+            <a href="/alunos/ver" class="btn btn-secondary">Voltar</a>
         </div>
     </div>
 </section>

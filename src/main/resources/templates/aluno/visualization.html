@@ -20,7 +20,6 @@
                 <th>RA</th>
                 <th>Nome</th>
                 <th>Curso</th>
-                <th>Faculdade</th>
                 <th>Ano de Entrada</th>
                 <th>Comentário Faculdade</th>
                 <th>Ações</th>
@@ -36,7 +35,6 @@
                 <td th:text="${aluno.ra}">1</td>
                 <td th:text="${aluno.nome}">Nome do Aluno</td>
                 <td th:text="${aluno.tituloCurso}">Curso</td>
-                <td th:text="${aluno.nomeFaculdade}">Faculdade</td>
                 <td th:text="${#temporals.format(aluno.anoEntrada, 'dd/MM/yyyy')}">01/01/2000</td>
                 <td th:text="${aluno.comentarioFaculdade}">Comentario Faculdade</td>
                 <td>
