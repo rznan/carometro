@@ -5,33 +5,24 @@
       layout:decorate="~{template.html}">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/cusroVisualization.css" th:href="@{/css/cursoVisualization.css}">
     <title>Curso</title>
 </head>
 <body>
 <section layout:fragment="conteudo">
     <div class="container">
+        <br>
         <h1>Cursos</h1>
 
-        <table class="table">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Inauguração</th>
-                <th>Ações</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="curso : ${cursos}">
-                <td th:text="${curso.id}" >1</td>
-                <td th:text="${curso.titulo}">Nome da Faculdade</td>
-                <td th:text="${#temporals.format(curso.inauguracao, 'dd/MM/yyyy')}">01/01/2000</td>
-                <td>
-                    <a th:href="@{/alunos/verPorCurso/{id}(id=${curso.id})}" class="btn btn-sm btn-warning">Listar Alunos</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <div class="curso-lista">
+            <div class="curso-card" th:each="curso : ${cursos}">
+                <h2 th:text="${curso.titulo}">Nome do Curso</h2>
+                <p><strong>Inauguração:</strong>
+                    <span th:text="${#temporals.format(curso.inauguracao, 'dd/MM/yyyy')}">01/01/2000</span>
+                </p>
+                <a th:href="@{/alunos/verPorCurso/{id}(id=${curso.id})}" class="btn-acao">Listar Alunos</a>
+            </div>
+        </div>
     </div>
 </section>
 </body>

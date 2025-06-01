@@ -1,0 +1,48 @@
+.curso-lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.curso-card {
+  background-color: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.curso-card:hover {
+  transform: translateY(-5px);
+}
+
+.curso-card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: #b20000;
+}
+
+.curso-card p {
+  font-size: 1.4rem;
+  margin: 0.5rem 0;
+}
+
+.btn-acao {
+  display: inline-block;
+  margin-top: auto;
+  padding: 0.5rem 1rem;
+  background-color: #b20000;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn-acao:hover {
+  background-color: #930000;
+}
