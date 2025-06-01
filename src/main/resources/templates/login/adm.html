@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{template.html}">
+<head>
+    <title>Entrar</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<section layout:fragment="conteudo">
+    <div sec:authorize="isAnonymous()">
+        <h2>Login ADM</h2>
+
+        <form th:action="@{/login}" method="post">
+            <div>
+                <label for="username">Email:</label>
+                <input type="text" id="username" name="username" placeholder="Digite seu email" required />
+            </div>
+            <div>
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password" placeholder="Digite sua senha" required />
+            </div>
+            <button type="submit">Entrar</button>
+        </form>
+
+        <div th:if="${msg}" style="color:red;">
+            <p th:text="${msg}"></p>
+        </div>
+    </div>
+    <div sec:authorize="isAuthenticated()">
+        <ul>
+            <li><a th:href="@{/cursos}">Editar Cursos</a></li>
+            <li><a th:href="@{/alunos}">Editar Alunos</a></li>
+        </ul>
+
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">Logout</button>
+        </form>
+
+    </div>
+</section>
+</body>
+</html>
