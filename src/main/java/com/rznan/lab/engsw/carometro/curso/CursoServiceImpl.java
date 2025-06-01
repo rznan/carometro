@@ -2,8 +2,6 @@ package com.rznan.lab.engsw.carometro.curso;
 
 import com.rznan.lab.engsw.carometro.aluno.AlunoServiceImpl;
 import com.rznan.lab.engsw.carometro.curso.dtos.*;
-import com.rznan.lab.engsw.carometro.faculdade.Faculdade;
-import com.rznan.lab.engsw.carometro.faculdade.FaculdadeServiceImpl;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -23,9 +21,6 @@ public class CursoServiceImpl implements ICursoService {
     @Autowired
     private AlunoServiceImpl alunoService;
 
-    @Lazy
-    @Autowired
-    private FaculdadeServiceImpl faculdadeService;
 
     @Override
     public List<CursoDto> getAll() {
@@ -72,7 +67,6 @@ public class CursoServiceImpl implements ICursoService {
 
         Curso curso = new Curso(dto);
         alunoService.getAlunosByIds(dto.alunosId()).forEach(curso::addAluno);
-        curso.setFaculdade(resolveFaculdade(dto.faculdadeId()));
 
         return new CursoDto(repository.save(curso));
     }
@@ -91,7 +85,6 @@ public class CursoServiceImpl implements ICursoService {
         curso.update(dto);
         curso.getAlunos().forEach(a -> a.setCurso(null));
         alunoService.getAlunosByIds(dto.alunosId()).forEach(curso::addAluno);
-        curso.setFaculdade(resolveFaculdade(dto.faculdadeId()));
 
         repository.save(curso);
     }
@@ -102,13 +95,5 @@ public class CursoServiceImpl implements ICursoService {
         Curso curso = repository.getReferenceById(id);
         curso.getAlunos().forEach(a -> a.setCurso(null));
         repository.deleteById(id);
-    }
-
-    private Faculdade resolveFaculdade(Long faculdadeId) throws Exception {
-        Faculdade faculdade = faculdadeService.getFaculdadeById(faculdadeId);
-        if (faculdade == null) {
-            throw new Exception("Faculdade inválida (ID: " + faculdadeId + ")");
-        }
-        return faculdade;
     }
 }

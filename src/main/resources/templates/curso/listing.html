@@ -17,7 +17,6 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>ID Faculdade</th>
                 <th>Nome</th>
                 <th>Inauguração</th>
                 <th>Ações</th>
@@ -26,7 +25,6 @@
             <tbody>
             <tr th:each="curso : ${cursos}">
                 <td th:text="${curso.id}">1</td>
-                <td th:text="${curso.faculdadeId}">1</td>
                 <td th:text="${curso.titulo}">Nome da Faculdade</td>
                 <td th:text="${#temporals.format(curso.inauguracao, 'dd/MM/yyyy')}">01/01/2000</td>
                 <td>

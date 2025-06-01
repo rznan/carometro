@@ -97,7 +97,7 @@ public class AlunoController {
     }
 
     @PutMapping
-    public String updateFaculdade(
+    public String updateAluno(
             @Valid @ModelAttribute("aluno") UpdateAlunoDto dto,
             BindingResult result,
             Model model,

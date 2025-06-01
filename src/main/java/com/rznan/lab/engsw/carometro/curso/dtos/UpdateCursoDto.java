@@ -13,9 +13,6 @@ public record UpdateCursoDto(
         @NotNull(message = "A lista de alunos não pode ser nula")
         List<@NotNull(message = "ID de aluno não pode ser nulo") Long> alunosId,
 
-        @NotNull(message = "Faculdade é obrigatória")
-        Long faculdadeId,
-
         @NotBlank(message = "O título do curso não pode estar vazio")
         @Size(min = 3, max = 100, message = "O título deve ter entre 3 e 100 caracteres")
         String titulo,

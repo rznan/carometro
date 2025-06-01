@@ -3,7 +3,6 @@ package com.rznan.lab.engsw.carometro.curso;
 import com.rznan.lab.engsw.carometro.aluno.Aluno;
 import com.rznan.lab.engsw.carometro.curso.dtos.CreateCursoDto;
 import com.rznan.lab.engsw.carometro.curso.dtos.UpdateCursoDto;
-import com.rznan.lab.engsw.carometro.faculdade.Faculdade;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,8 +25,6 @@ public class Curso {
 
     @OneToMany(mappedBy = "curso")
     private List<Aluno> alunos;
-    @ManyToOne
-    private Faculdade faculdade;
 
     private String titulo;
     private LocalDate inauguracao;

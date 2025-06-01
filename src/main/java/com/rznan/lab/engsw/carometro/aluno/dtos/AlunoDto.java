@@ -11,8 +11,6 @@ public record AlunoDto(
         long idCurso,
         String tituloCurso,
 
-        long idFaculdade,
-        String nomeFaculdade,
         String ra,
         String nome,
         LocalDate anoEntrada,
@@ -26,8 +24,6 @@ public record AlunoDto(
                         a.getId(),
                         a.getCurso() != null ? a.getCurso().getId() : -1,
                         a.getCurso() != null ? a.getCurso().getTitulo() : "Não encontrado",
-                        a.getCurso() != null ? a.getCurso().getFaculdade() != null ? a.getCurso().getFaculdade().getId() : -1 : -1,
-                        a.getCurso() != null ? a.getCurso().getFaculdade() != null ? a.getCurso().getFaculdade().getNome() : "Faculdade não encontrada" : "Curso não encontrado",
                         a.getRa(),
                         a.getNome(),
                         a.getAnoEntrada(),

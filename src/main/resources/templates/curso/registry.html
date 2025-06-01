@@ -26,17 +26,6 @@
             </div>
 
             <div class="mb-4">
-                <label for="faculdades" class="form-label">Faculdades Disponíveis</label>
-                <select id="faculdades" class="form-select" th:field="*{faculdadeId}">
-                    <option th:each="faculdade : ${todasFaculdades}"
-                            th:value="${faculdade.id}"
-                            th:text="${faculdade.nome}">
-                    </option>
-                </select>
-                <div class="text-danger" th:if="${#fields.hasErrors('faculdadeId')}" th:errors="*{faculdadeId}"></div>
-            </div>
-
-            <div class="mb-4">
                 <label for="alunos" class="form-label">Alunos</label>
                 <select id="alunos" multiple class="form-select" th:field="*{alunosId}">
                     <option th:each="aluno : ${todosAlunos}"

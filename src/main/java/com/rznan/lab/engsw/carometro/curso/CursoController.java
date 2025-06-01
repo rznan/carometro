@@ -6,7 +6,6 @@ import com.rznan.lab.engsw.carometro.curso.dtos.CreateCursoDto;
 import com.rznan.lab.engsw.carometro.curso.dtos.CursoDto;
 import com.rznan.lab.engsw.carometro.curso.dtos.DetailsCursoDto;
 import com.rznan.lab.engsw.carometro.curso.dtos.UpdateCursoDto;
-import com.rznan.lab.engsw.carometro.faculdade.IFaculdadeService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -30,8 +29,6 @@ public class CursoController {
     @Lazy @Autowired
     private IAlunoService alunoServiceImpl;
 
-    @Lazy @Autowired
-    private IFaculdadeService faculdadeServiceImpl;
 
     private static final Logger logger = LoggerFactory.getLogger(CursoController.class);
 
@@ -43,8 +40,7 @@ public class CursoController {
 
     @GetMapping("/novo")
     public String loadNewCursoPage(Model model) {
-        model.addAttribute("curso", new CreateCursoDto(List.of(), 0L, "", LocalDate.now()));
-        model.addAttribute("todasFaculdades", faculdadeServiceImpl.getAll());
+        model.addAttribute("curso", new CreateCursoDto(List.of(), "", LocalDate.now()));
         model.addAttribute("todosAlunos", alunoServiceImpl.getAll());
         return "curso/registry";
     }
@@ -59,11 +55,9 @@ public class CursoController {
         UpdateCursoDto dto = new UpdateCursoDto(
                 tempDto.id(),
                 tempDto.alunos().stream().map(AlunoDto::idCurso).toList(),
-                tempDto.faculdade() != null ? tempDto.faculdade().id() : -1,
                 tempDto.titulo(),
                 tempDto.inauguracao());
         model.addAttribute("curso", dto);
-        model.addAttribute("todasFaculdades", faculdadeServiceImpl.getAll());
         model.addAttribute("todosAlunos", alunoServiceImpl.getAll());
         return "curso/update";
     }
@@ -71,7 +65,6 @@ public class CursoController {
     @PostMapping
     public String saveCurso(@Valid @ModelAttribute("curso") CreateCursoDto dto, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("todasFaculdades", faculdadeServiceImpl.getAll());
             model.addAttribute("todosAlunos", alunoServiceImpl.getAll());
             return "curso/registry";
         }
@@ -87,7 +80,6 @@ public class CursoController {
     @PutMapping
     public String updateCurso(@Valid @ModelAttribute("curso") UpdateCursoDto dto, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            model.addAttribute("todasFaculdades", faculdadeServiceImpl.getAll());
             model.addAttribute("todosAlunos", alunoServiceImpl.getAll());
             return "curso/update";
         }
