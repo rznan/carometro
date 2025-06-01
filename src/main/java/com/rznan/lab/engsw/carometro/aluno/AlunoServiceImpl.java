@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 @Lazy
 @Service
@@ -128,6 +129,24 @@ public class AlunoServiceImpl implements IAlunoService {
     }
 
     @Override
-    public List<AlunoDto> getByCursoId(long cursoId) {
-        return alunoRepository.findByCursoId(cursoId).stream().map(AlunoDto::new).toList(); }
+    public List<AlunoDto> filter(Long curso, Integer ano, String nome) {
+        List<Aluno> alunos = alunoRepository.findAll();
+
+        Stream<Aluno> stream = alunos.stream();
+
+        if (curso != null) {
+            stream = stream.filter(a -> a.getCurso() != null && a.getCurso().getId() == curso);
+        }
+
+        if (ano != null) {
+            // TODO: ALTERAR PARA ANO DE FINALIZAÇÃO QUANDO ARRUMAR ALUNO
+            stream = stream.filter(a -> a.getAnoEntrada().getYear() == ano);
+        }
+
+        if (nome != null && !nome.isBlank()) {
+            stream = stream.filter(a -> a.getNome().toLowerCase().contains(nome.strip().toLowerCase()));
+        }
+
+        return stream.map(AlunoDto::new).toList();
+    }
 }

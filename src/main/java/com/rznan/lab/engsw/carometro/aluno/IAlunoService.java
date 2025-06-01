@@ -19,5 +19,5 @@ public interface IAlunoService {
 
     void delete(Long id);
 
-    List<AlunoDto> getByCursoId(long cursoId);
+    List<AlunoDto> filter(Long curso, Integer ano, String nome);
 }

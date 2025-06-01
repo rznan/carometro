@@ -20,7 +20,7 @@
                 <p><strong>Inauguração:</strong>
                     <span th:text="${#temporals.format(curso.inauguracao, 'dd/MM/yyyy')}">01/01/2000</span>
                 </p>
-                <a th:href="@{/alunos/verPorCurso/{id}(id=${curso.id})}" class="btn-acao">Listar Alunos</a>
+                <a th:href="@{/alunos/filtrar?curso={id}&ano=&nome=(id=${curso.id})}" class="btn-acao">Listar Alunos</a>
             </div>
         </div>
     </div>

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 @RequestMapping("/alunos")
@@ -41,12 +42,7 @@ public class AlunoController {
     @GetMapping("/ver")
     public String loadVisualiztion(Model model) {
         model.addAttribute("alunos", alunoServiceImpl.getAll());
-        return "aluno/visualization";
-    }
-
-    @GetMapping("/verPorCurso/{id}")
-    public String loadVisualiztionByCurso(Model model, @PathVariable long id) {
-        model.addAttribute("alunos", alunoServiceImpl.getByCursoId(id));
+        model.addAttribute("cursos", cursoServiceImpl.getAll());
         return "aluno/visualization";
     }
 
@@ -142,4 +138,22 @@ public class AlunoController {
         model.addAttribute("aluno", dto);
         return "aluno/details";
     }
+
+    @GetMapping("/filtrar")
+    public String filtrarAlunos(@RequestParam(required = false) Long curso,
+                                @RequestParam(required = false) Integer ano,
+                                @RequestParam(required = false) String nome,
+                                Model model) {
+        List<AlunoDto> alunosFiltrados = alunoServiceImpl.filter(curso, ano, nome);
+        model.addAttribute("alunos", alunosFiltrados);
+        model.addAttribute("cursos", cursoServiceImpl.getAll());
+
+        // manter preenchimento
+        model.addAttribute("cursoSelecionado", curso);
+        model.addAttribute("anoSelecionado", ano);
+        model.addAttribute("nomeSelecionado", nome);
+
+        return "aluno/visualization";
+    }
+
 }

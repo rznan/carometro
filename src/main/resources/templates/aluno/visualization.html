@@ -6,11 +6,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Ver Alunos</title>
+    <link rel="stylesheet" href="/css/alunoVisualization.css" th:href="@{/css/alunoVisualization.css}">
 </head>
 <body>
 <section layout:fragment="conteudo">
     <div class="container">
+        <br>
         <h1>Alunos</h1>
+        <div class="filtros">
+            <form th:action="@{/alunos/filtrar}" method="get" class="filtros-form">
+
+                <label for="curso">Curso:</label>
+                <select name="curso" id="curso">
+                    <option value="">Todos</option>
+                    <option th:each="curso : ${cursos}" th:value="${curso.id}" th:text="${curso.titulo}" th:selected="${curso.id == cursoSelecionado}">Curso</option>
+
+                </select>
+
+                <label for="ano">Ano:</label>
+                <input type="number" name="ano" id="ano" placeholder="Ex: 2023" th:value="${anoSelecionado}">
+
+                <label for="nome">Nome:</label>
+                <input type="text" name="nome" id="nome" placeholder="Digite o nome" th:value="${nomeSelecionado}">>
+
+                <button type="submit">Filtrar</button>
+            </form>
+        </div>
+
 
         <table class="table">
             <thead>
