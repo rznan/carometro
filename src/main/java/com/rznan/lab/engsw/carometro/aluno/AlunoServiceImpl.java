@@ -149,7 +149,7 @@ public class AlunoServiceImpl implements IAlunoService {
 
         if (ano != null) {
             // TODO: ALTERAR PARA ANO DE FINALIZAÇÃO QUANDO ARRUMAR ALUNO
-            stream = stream.filter(a -> a.getAnoFormado().getValue() == ano);
+            stream = stream.filter(a -> a.getAnoFormado() != null && a.getAnoFormado().getValue() == ano);
         }
 
         if (nome != null && !nome.isBlank()) {
