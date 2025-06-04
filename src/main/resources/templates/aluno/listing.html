@@ -17,10 +17,10 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>RA</th>
                 <th>Nome</th>
+                <th>Apelido</th>
                 <th>Curso</th>
-                <th>Ano de Entrada</th>
+                <th>Ano de Formado</th>
                 <th>Comentário Faculdade</th>
                 <th>Ações</th>
             </tr>
@@ -28,10 +28,10 @@
             <tbody>
             <tr th:each="aluno : ${alunos}">
                 <td th:text="${aluno.id}">1</td>
-                <td th:text="${aluno.ra}">1</td>
                 <td th:text="${aluno.nome}">Nome do Aluno</td>
+                <td th:text="${aluno.apelido}">Apelido</td>
                 <td th:text="${aluno.tituloCurso}">Curso</td>
-                <td th:text="${#temporals.format(aluno.anoEntrada, 'dd/MM/yyyy')}">01/01/2000</td>
+                <td th:text="${aluno.anoFormado}">2000</td>
                 <td th:text="${aluno.comentarioFaculdade}">Comentario Faculdade</td>
                 <td>
                     <a th:href="@{/alunos/{id}/editar(id=${aluno.id})}" class="btn btn-sm btn-warning">Editar</a>

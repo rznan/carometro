@@ -10,6 +10,7 @@ public interface IAlunoService {
     List<AlunoDto> getAll();
 
     List<AlunoDto> getAllById(List<Long> ids);
+    public List<AlunoDto> buscarPorNome(String nome);
 
     DetailsAlunoDto getById(Long id);
 

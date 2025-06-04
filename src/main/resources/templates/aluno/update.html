@@ -6,19 +6,25 @@
 <head>
     <title>Editar Aluno</title>
     <meta charset="UTF-8">
+    <script th:src="@{/js/preview.js}"></script>
 </head>
 <body>
 <section layout:fragment="conteudo">
     <div class="container mt-5">
         <h2 class="mb-4">Editar Aluno</h2>
 
-        <form th:action="@{/alunos}" th:object="${aluno}" method="post" enctype="multipart/form-data" class="needs-validation" >
-            <input type="hidden" name="_method" value="put" />
-            <input type="hidden" th:field="*{id}" />
+        <form th:action="@{/alunos}" th:object="${aluno}" method="post" enctype="multipart/form-data"
+              class="needs-validation">
+            <input type="hidden" name="_method" value="put"/>
+            <input type="hidden" th:field="*{id}"/>
 
             <div class="mb-3">
                 <label for="imagem" class="form-label">Imagem de Perfil</label>
-                <input type="file" id="imagem" name="imagem" class="form-control" accept="image/*">
+                <img id="preview" src="#" alt="Pré-visualização"
+                     style="display: none; max-width: 200px; border-radius: 50%; margin-top: 10px;">
+                <br>
+                <input type="file" id="imagem" name="imagem" class="form-control" accept="image/*"
+                       onchange="previewImagem(event)">
                 <div class="text-danger" th:if="${erroImagem}" th:text="${erroImagem}"></div>
             </div>
 
@@ -34,9 +40,9 @@
             </div>
 
             <div class="mb-3">
-                <label for="ra" class="form-label">ra do Aluno</label>
-                <input type="text" id="ra" class="form-control" th:field="*{ra}" required>
-                <div class="text-danger" th:if="${#fields.hasErrors('ra')}" th:errors="*{ra}"></div>
+                <label for="apelido" class="form-label">apelido</label>
+                <input type="text" id="apelido" class="form-control" th:field="*{apelido}" required>
+                <div class="text-danger" th:if="${#fields.hasErrors('apelido')}" th:errors="*{apelido}"></div>
 
             </div>
 
@@ -47,35 +53,53 @@
             </div>
 
             <div class="mb-3">
-                <label  class="form-label">Data de Entrada</label>
-                <input type="date" name="anoEntrada"
-                       class="form-control"
-                       th:value="${#temporals.format(aluno.anoEntrada, 'yyyy-MM-dd')}" required>
-                <div class="text-danger" th:if="${#fields.hasErrors('anoEntrada')}" th:errors="*{anoEntrada}"></div>
+                <label class="form-label">Data de Formado</label>
+                <input type="number" id="anoFormado" class="form-control" th:field="*{anoFormado}" min="1900" max="2100" required>
+                <div class="text-danger" th:if="${#fields.hasErrors('anoFormado')}" th:errors="*{anoFormado}"></div>
             </div>
 
             <div class="mb-3">
-                <label for="historico" class="form-label">Histórico do Aluno</label>
-                <input type="text" id="historico" class="form-control" th:field="*{historico}" >
+                <label for="sobreMimProfissional" class="form-label">Sobre Mim(Profissional)</label>
+                <input type="text" id="sobreMimProfissional" class="form-control" th:field="*{sobreMimProfissional}">
                 <div class="invalid-feedback">
-                    Por favor, informe o historico.
+                    Fale sobre sua trajetória profissional.
                 </div>
             </div>
-            <div class="mb-3">
-                <label for="comentarioFaculdade" class="form-label">Comentario sobre a Faculdade</label>
-                <input type="text" id="comentarioFaculdade" class="form-control" th:field="*{comentarioFaculdade}" >
+                <div class="mb-3">
+                    <label for="sobreMimSocial" class="form-label">Sobre Mim(Social)</label>
+                    <input type="text" id="sobreMimSocial" class="form-control" th:field="*{sobreMimSocial}">
+                    <div class="invalid-feedback">
+                        Fale um pouco sobre você.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="comentarioFaculdade" class="form-label">Comentario sobre a Faculdade</label>
+                    <input type="text" id="comentarioFaculdade" class="form-control" th:field="*{comentarioFaculdade}">
 
-            </div>
+                </div>
 
-            <div class="mb-3">
-                <label for="comentarioLivre" class="form-label">Comentario Livre</label>
-                <input type="text" id="comentarioLivre" class="form-control" th:field="*{comentarioLivre}">
+                <div class="mb-3">
+                    <label for="comentarioLivre" class="form-label">Comentario Livre</label>
+                    <input type="text" id="comentarioLivre" class="form-control" th:field="*{comentarioLivre}">
 
-            </div>
+                </div>
+
+<!--                <div class="mb-3">-->
+<!--                    <label for="fotos" class="form-label">Fotos Adicionais</label>-->
+<!--                    <input type="file" id="fotos" name="fotos" class="form-control" accept="image/*" multiple>-->
+<!--                    <div class="form-text">Você pode enviar até 2 Fotos.</div>-->
+<!--                </div>-->
+
+                <div class="mb-3">
+                    <label for="linkedin" class="form-label">Perfil no LinkedIn</label>
+                    <input type="url" id="linkedin" name="linkedin" class="form-control"
+                           placeholder="https://linkedin.com/in/seu-perfil" th:field="*{linkedin}">
+                </div>
 
 
-            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-            <a th:href="@{/faculdades}" class="btn btn-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                <a th:href="@{/faculdades}" class="btn btn-secondary">Cancelar</a>
+
         </form>
     </div>
 </section>

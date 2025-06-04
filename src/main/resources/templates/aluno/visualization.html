@@ -39,10 +39,10 @@
             <tr>
                 <th>ID</th>
                 <th>Foto</th>
-                <th>RA</th>
                 <th>Nome</th>
+                <th>Apelido</th>
                 <th>Curso</th>
-                <th>Ano de Entrada</th>
+                <th>Ano de Formado</th>
                 <th>Comentário Faculdade</th>
                 <th>Ações</th>
 
@@ -54,10 +54,10 @@
                 <td>
                     <img th:src="@{${aluno.imagemPerfil != null ? aluno.imagemPerfil : '/images/placeholder.jpg'}}" width="80" height="80" style="object-fit: cover; border-radius: 50%;" />
                 </td>
-                <td th:text="${aluno.ra}">1</td>
+                <td th:text="${aluno.apelido}">1</td>
                 <td th:text="${aluno.nome}">Nome do Aluno</td>
                 <td th:text="${aluno.tituloCurso}">Curso</td>
-                <td th:text="${#temporals.format(aluno.anoEntrada, 'dd/MM/yyyy')}">01/01/2000</td>
+                <td th:text="${aluno.anoFormado}">2000</td>
                 <td th:text="${aluno.comentarioFaculdade}">Comentario Faculdade</td>
                 <td>
                     <a th:href="@{/alunos/{id}/detalhes(id=${aluno.id})}" class="btn btn-sm btn-warning">Detalhes</a>

@@ -16,17 +16,20 @@
         <div>
             <h1>Detalhes do Aluno</h1>
 
-            <div class="card " >
+            <div class="card ">
                 <div style="text-align: center;">
-                    <img th:src="@{${aluno.imagemPerfil != null ? aluno.imagemPerfil : '/images/placeholder.jpg'}}" alt="Foto do Aluno" style="max-width: 200px; border-radius: 8px;">
+                    <img th:src="@{${aluno.imagemPerfil != null ? aluno.imagemPerfil : '/images/placeholder.jpg'}}"
+                         alt="Foto do Aluno" style="max-width: 200px; border-radius: 8px;">
                 </div>
                 <h2 th:text="${aluno.nome}">Nome do Aluno</h2>
 
-                <p><strong>RA:</strong> <span th:text="${aluno.ra}">123456</span></p>
-                <p><strong>Ano de Entrada:</strong>
-                    <span th:text="${#temporals.format(aluno.anoEntrada, 'dd/MM/yyyy')}">01/01/2020</span>
+                <p><strong>Apelido:</strong> <span th:text="${aluno.apelido}">Apelido</span></p>
+                <p><strong>Ano de Formado:</strong>
+                    <span th:text="${aluno.anoFormado}">2000</span>
                 </p>
-                <p><strong>Histórico:</strong> <span th:text="${aluno.historico}">Histórico do aluno...</span></p>
+                <p><strong>Sobre Mim(Profissional):</strong> <span
+                        th:text="${aluno.sobreMimProfissional}">sei la...</span></p>
+                <p><strong>Sobre Mim(Social):</strong> <span th:text="${aluno.sobreMimSocial}">sei la...</span></p>
                 <p><strong>Comentário da Faculdade:</strong>
                     <span th:text="${aluno.comentarioFaculdade}">Comentário da instituição</span>
                 </p>
@@ -38,9 +41,14 @@
             <div class="card" th:if="${aluno.curso != null}">
                 <h3>Curso</h3>
                 <p><strong>Título:</strong> <span th:text="${aluno.curso.titulo}">Engenharia</span></p>
-                <p><strong>Inauguração:</strong>
-                    <span th:text="${#temporals.format(aluno.curso.inauguracao, 'dd/MM/yyyy')}">01/01/2000</span>
-                </p>
+<!--                <img th:src="@{${aluno.fotos.get(1) != null ? aluno.fotos.get(1) : '/images/placeholder.jpg'}}"-->
+<!--                     alt="Foto do Aluno" style="max-width: 200px; border-radius: 8px;">-->
+<!--                <img th:src="@{${aluno.fotos.get(2) != null ? aluno.fotos.get(2) : '/images/placeholder.jpg'}}"-->
+<!--                     alt="Foto do Aluno" style="max-width: 200px; border-radius: 8px;">-->
+                <strong>LinkedIn:</strong>
+                <a th:href="${aluno.linkedin}" th:text="${aluno.linkedin}" target="_blank"></a>
+
+
             </div>
 
             <a href="/alunos/ver" class="btn btn-secondary">Voltar</a>

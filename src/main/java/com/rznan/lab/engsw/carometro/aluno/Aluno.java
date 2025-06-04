@@ -7,6 +7,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.Year;
+import java.util.List;
 
 @Table(name = "aluno")
 @Entity(name = "aluno")
@@ -26,31 +28,39 @@ public class Aluno {
     @ManyToOne
     private Curso curso;
 
-    private String ra;
+    private String apelido;
     private String nome;
-    private LocalDate anoEntrada;
-    private String historico;
+    private Year anoFormado;
+    private String sobreMimProfissional;
+    private String sobreMimSocial;
     private String comentarioFaculdade;
     private String comentarioLivre;
     private String imagemPerfil;
-
+    private List<String> fotos;
+    private String linkedin;
     public Aluno(CreateAlunoDto dados) {
         this.nome = dados.nome();
-        this.ra = dados.ra();
-        this.anoEntrada = dados.anoEntrada();
-        this.historico = dados.historico();
+        this.apelido = dados.apelido();
+        this.anoFormado = dados.anoFormado();
+        this.sobreMimProfissional = dados.sobreMimProfissional();
+        this.sobreMimSocial = dados.sobreMimSocial();
         this.comentarioFaculdade = dados.comentarioFaculdade();
         this.comentarioLivre = dados.comentarioLivre();
         this.imagemPerfil = dados.imagemPerfil();
+        this.fotos = dados.fotos();
+        this.linkedin = dados.linkedin();
     }
 
     public void update(UpdateAlunoDto dados) {
         // TODO: checar se os campos estão em branco
         this.nome = dados.nome();
-        this.ra = dados.ra();
-        this.anoEntrada = dados.anoEntrada();
-        this.historico = dados.historico();
+        this.apelido = dados.apelido();
+        this.anoFormado = dados.anoFormado();
+        this.sobreMimProfissional = dados.sobreMimProfissional();
+        this.sobreMimSocial = dados.sobreMimSocial();
         this.comentarioFaculdade = dados.comentarioFaculdade();
         this.comentarioLivre = dados.comentarioLivre();
+        this.linkedin = dados.linkedin();
+
     }
 }

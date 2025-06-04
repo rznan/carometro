@@ -41,9 +41,17 @@ public class AlunoServiceImpl implements IAlunoService {
         return alunoRepository.findAll(Sort.by("nome").ascending()).stream().map(AlunoDto::new).toList();
     }
 
+
     @Override
     public List<AlunoDto> getAllById(List<Long> ids) {
         return getAlunosByIds(ids).stream().map(AlunoDto::new).toList();
+    }
+    @Override
+    public List<AlunoDto> buscarPorNome(String nome) {
+        return alunoRepository.findByNomeContainingIgnoreCaseOrderByNomeAsc(nome)
+                .stream()
+                .map(AlunoDto::new)
+                .toList();
     }
 
     @Override
@@ -93,6 +101,7 @@ public class AlunoServiceImpl implements IAlunoService {
     @Override
     @Transactional
     public void delete(Long id) {
+
         alunoRepository.findById(id).ifPresent(a -> deleteImagemSilently(a.getImagemPerfil()));
         alunoRepository.deleteById(id);
     }
@@ -140,7 +149,7 @@ public class AlunoServiceImpl implements IAlunoService {
 
         if (ano != null) {
             // TODO: ALTERAR PARA ANO DE FINALIZAÇÃO QUANDO ARRUMAR ALUNO
-            stream = stream.filter(a -> a.getAnoEntrada().getYear() == ano);
+            stream = stream.filter(a -> a.getAnoFormado().getValue() == ano);
         }
 
         if (nome != null && !nome.isBlank()) {

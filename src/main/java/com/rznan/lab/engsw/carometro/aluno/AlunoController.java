@@ -17,8 +17,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDate;
+
+
 import java.util.List;
+
+import java.time.Year;
+import java.util.Collections;
+
 
 @Controller
 @RequestMapping("/alunos")
@@ -38,17 +43,24 @@ public class AlunoController {
         model.addAttribute("alunos", alunoServiceImpl.getAll());
         return "aluno/listing";
     }
+    @GetMapping("/buscar")
+    @ResponseBody
+    public List<AlunoDto> buscarAlunos(@RequestParam("nome") String nome) {
+        return alunoServiceImpl.buscarPorNome(nome);
+    }
+
 
     @GetMapping("/ver")
-    public String loadVisualiztion(Model model) {
+    public String loadVisualization(Model model) {
         model.addAttribute("alunos", alunoServiceImpl.getAll());
         model.addAttribute("cursos", cursoServiceImpl.getAll());
         return "aluno/visualization";
     }
 
+
     @GetMapping("/novo")
     public String loadNewAlunoPage(Model model) {
-        model.addAttribute("aluno", new CreateAlunoDto( 0L,"","",LocalDate.now(),"","","",""));
+        model.addAttribute("aluno", new CreateAlunoDto( 0L,"","", Year.now(),"","","","","", Collections.singletonList(""),""));
         model.addAttribute("cursos", cursoServiceImpl.getAll());
 
         return "aluno/registry";
@@ -78,6 +90,8 @@ public class AlunoController {
         return "redirect:/alunos";
     }
 
+
+
     @GetMapping("{id}/editar")
     public String loadEditFaculdadePage(@PathVariable Long id, Model model) {
         DetailsAlunoDto dto = alunoServiceImpl.getById(id);
@@ -86,13 +100,18 @@ public class AlunoController {
         }
         UpdateAlunoDto nDto = new UpdateAlunoDto(
                 dto.id(),
-                dto.curso() != null ? dto.curso().id() : -1,
-                dto.ra(),
+                dto.curso().id(),
                 dto.nome(),
-                dto.anoEntrada(),
-                dto.historico(),
+                dto.apelido(),
+                dto.anoFormado(),
+                dto.sobreMimProfissional(),
+                dto.sobreMimSocial(),
                 dto.comentarioFaculdade(),
-                dto.comentarioLivre());
+                dto.comentarioLivre(),
+                dto.imagemPerfil(),
+                dto.fotos(),
+                dto.linkedin()
+        );
         model.addAttribute("aluno", nDto);
         model.addAttribute("cursos", cursoServiceImpl.getAll());
         return "aluno/update";
