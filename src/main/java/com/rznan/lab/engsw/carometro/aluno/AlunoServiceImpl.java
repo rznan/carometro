@@ -41,11 +41,20 @@ public class AlunoServiceImpl implements IAlunoService {
         return alunoRepository.findAll(Sort.by("nome").ascending()).stream().map(AlunoDto::new).toList();
     }
 
+    @Override
+    public List<AlunoDto> findByStatus() {
+        //Busca os alunos que foram aprovados e devem ser exibidos
+        return alunoRepository.findByAprovadoTrue(true).stream()
+                .map(AlunoDto::new)
+                .toList();
+    }
+
 
     @Override
     public List<AlunoDto> getAllById(List<Long> ids) {
         return getAlunosByIds(ids).stream().map(AlunoDto::new).toList();
     }
+
     @Override
     public List<AlunoDto> buscarPorNome(String nome) {
         return alunoRepository.findByNomeContainingIgnoreCaseOrderByNomeAsc(nome)

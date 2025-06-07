@@ -11,6 +11,7 @@ public interface IAlunoService {
 
     List<AlunoDto> getAllById(List<Long> ids);
     public List<AlunoDto> buscarPorNome(String nome);
+    List<AlunoDto> findByStatus();
 
     DetailsAlunoDto getById(Long id);
 

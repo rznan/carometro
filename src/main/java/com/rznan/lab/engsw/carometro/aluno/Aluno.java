@@ -27,9 +27,8 @@ public class Aluno {
 
     @ManyToOne
     private Curso curso;
-
-    private String apelido;
     private String nome;
+    private String apelido;
     private Year anoFormado;
     private String sobreMimProfissional;
     private String sobreMimSocial;
@@ -38,6 +37,8 @@ public class Aluno {
     private String imagemPerfil;
     private List<String> fotos;
     private String linkedin;
+    private boolean aprovado = false;
+
     public Aluno(CreateAlunoDto dados) {
         this.nome = dados.nome();
         this.apelido = dados.apelido();

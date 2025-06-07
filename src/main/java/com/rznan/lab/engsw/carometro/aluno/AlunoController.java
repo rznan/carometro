@@ -40,7 +40,7 @@ public class AlunoController {
 
     @GetMapping
     public String loadListing(Model model) {
-        model.addAttribute("alunos", alunoServiceImpl.getAll());
+        model.addAttribute("alunos", alunoServiceImpl.findByStatus());
         return "aluno/listing";
     }
     @GetMapping("/buscar")
@@ -52,7 +52,7 @@ public class AlunoController {
 
     @GetMapping("/ver")
     public String loadVisualization(Model model) {
-        model.addAttribute("alunos", alunoServiceImpl.getAll());
+        model.addAttribute("alunos", alunoServiceImpl.findByStatus());
         model.addAttribute("cursos", cursoServiceImpl.getAll());
         return "aluno/visualization";
     }
