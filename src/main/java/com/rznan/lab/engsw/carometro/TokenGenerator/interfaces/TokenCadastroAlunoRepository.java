@@ -1,5 +1,6 @@
-package com.rznan.lab.engsw.carometro.TokenGenerator;
+package com.rznan.lab.engsw.carometro.TokenGenerator.interfaces;
 
+import com.rznan.lab.engsw.carometro.TokenGenerator.TokenCadastroAluno;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

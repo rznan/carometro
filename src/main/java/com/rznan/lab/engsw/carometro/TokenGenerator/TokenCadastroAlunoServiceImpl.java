@@ -1,5 +1,7 @@
 package com.rznan.lab.engsw.carometro.TokenGenerator;
 
+import com.rznan.lab.engsw.carometro.TokenGenerator.interfaces.TokenCadastroAlunoRepository;
+import com.rznan.lab.engsw.carometro.TokenGenerator.interfaces.TokenCadastroAlunoService;
 import com.rznan.lab.engsw.carometro.aluno.AlunoServiceImpl;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,22 +14,19 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class TokenCadastroAlunoImpl implements TokenCadastroAlunoService {
+public class TokenCadastroAlunoServiceImpl implements TokenCadastroAlunoService {
 
     @Autowired
     private TokenCadastroAlunoRepository repository;
 
-
-    @Autowired
-    @Lazy
-    private AlunoServiceImpl alunoService;
-
     public List<String> gerarTokensNovos(int quantidade) {
+
+        int tempoValidade = 30;
 
         List<TokenCadastroAluno> tokensParaSalvar = new ArrayList<>();
         List<String> tokensGerados = new ArrayList<>();
 
-        LocalDateTime validade = LocalDateTime.now().plusDays(30);
+        LocalDateTime validade = LocalDateTime.now().plusDays(tempoValidade);
 
         for (int i = 0; i < quantidade; i++) {
             String tokenUnico = UUID.randomUUID().toString();
@@ -42,29 +41,26 @@ public class TokenCadastroAlunoImpl implements TokenCadastroAlunoService {
 
     }
 
-    @Override
-    public TokenCadastroAluno validarToken(String token) {
+
+    public boolean validarToken(String token) {
         return repository.findByToken(token)
-                .filter(t -> !t.isValido())
-                .orElse(null);
+                .stream().anyMatch(t -> !t.isValido());
     }
 
 
-    @Override
-        @Transactional
-        public void marcarComoUsado (TokenCadastroAluno token){
-            token.setUsado(true);
-            repository.save(token);
-        }
-
-        // (Opcional) para limpeza automática
-        @Override
-        @Transactional
-        public void removerTokensExpirados () {
-            List<TokenCadastroAluno> expirados = repository.findAll().stream()
-                    .filter(TokenCadastroAluno::isValido)
-                    .toList();
-
-            repository.deleteAll(expirados);
-        }
+    @Transactional
+    public void marcarComoUsado(TokenCadastroAluno token) {
+        token.setUsado(true);
+        repository.save(token);
     }
+
+    // (Opcional) para limpeza automática
+    @Transactional
+    public void removerTokensExpirados() {
+        List<TokenCadastroAluno> expirados = repository.findAll().stream()
+                .filter(TokenCadastroAluno::isValido)
+                .toList();
+
+        repository.deleteAll(expirados);
+    }
+}

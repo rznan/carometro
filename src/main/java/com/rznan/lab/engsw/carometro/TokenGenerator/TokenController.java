@@ -1,5 +1,7 @@
 package com.rznan.lab.engsw.carometro.TokenGenerator;
 
+import com.rznan.lab.engsw.carometro.TokenGenerator.interfaces.TokenCadastroAlunoService;
+import com.rznan.lab.engsw.carometro.TokenGenerator.interfaces.TokenEdicaoAlunoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;

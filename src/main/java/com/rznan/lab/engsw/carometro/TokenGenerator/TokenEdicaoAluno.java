@@ -7,11 +7,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+
 @Table(name = "token_edicao_aluno")
 @Entity(name = "token_edicao_aluno")
 @Getter
 @Setter
-public class TokenEdicaoAluno{
+public class TokenEdicaoAluno {
 
 
     @Id
@@ -28,7 +29,6 @@ public class TokenEdicaoAluno{
     @ManyToOne
     @JoinColumn(name = "aluno_id", nullable = false)
     private Aluno aluno;
-
 
 
     public TokenEdicaoAluno(String token, LocalDateTime validoAte, Aluno aluno) {
