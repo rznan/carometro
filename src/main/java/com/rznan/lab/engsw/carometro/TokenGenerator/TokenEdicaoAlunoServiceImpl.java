@@ -6,6 +6,7 @@ import com.rznan.lab.engsw.carometro.aluno.Aluno;
 import com.rznan.lab.engsw.carometro.aluno.AlunoServiceImpl;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@Qualifier("tokenEdicaoAlunoServiceImpl")
 public class TokenEdicaoAlunoServiceImpl implements TokenEdicaoAlunoService {
 
     @Autowired
@@ -43,10 +45,14 @@ public class TokenEdicaoAlunoServiceImpl implements TokenEdicaoAlunoService {
                 .stream().anyMatch(t -> !t.isValido());
     }
 
+    @Override
     @Transactional
-    public void marcarComoUsado(TokenEdicaoAluno token) {
-        token.setUsado(true);
-        repository.save(token);
+    public void marcarComoUsado(String token) {
+        TokenEdicaoAluno tokenCadastroAluno = repository.findByToken(token)
+                .orElseThrow(() -> new IllegalArgumentException("Token inválido: " + token));
+
+        tokenCadastroAluno.setUsado(true);
+        repository.save(tokenCadastroAluno);
     }
 
 

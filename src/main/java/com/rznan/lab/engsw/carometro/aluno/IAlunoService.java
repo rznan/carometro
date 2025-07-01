@@ -15,7 +15,7 @@ public interface IAlunoService {
 
     DetailsAlunoDto getById(Long id);
 
-    AlunoDto save(CreateAlunoDto dadosCadastroAluno, MultipartFile imagemPerfil) throws Exception;
+    Aluno save(CreateAlunoDto dadosCadastroAluno, MultipartFile imagemPerfil) throws Exception;
 
     void update(UpdateAlunoDto updateAlunoDto,MultipartFile imagemPerfil) throws Exception;
 

@@ -5,15 +5,18 @@ import com.rznan.lab.engsw.carometro.TokenGenerator.interfaces.TokenCadastroAlun
 import com.rznan.lab.engsw.carometro.aluno.AlunoServiceImpl;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@Qualifier("tokenCadastroAlunoServiceImpl")
 public class TokenCadastroAlunoServiceImpl implements TokenCadastroAlunoService {
 
     @Autowired
@@ -49,9 +52,12 @@ public class TokenCadastroAlunoServiceImpl implements TokenCadastroAlunoService 
 
 
     @Transactional
-    public void marcarComoUsado(TokenCadastroAluno token) {
-        token.setUsado(true);
-        repository.save(token);
+    public void marcarComoUsado(String token) {
+        TokenCadastroAluno tokenCadastroAluno = repository.findByToken(token)
+                .orElseThrow(() -> new IllegalArgumentException("Token inválido: " + token));
+
+        tokenCadastroAluno.setUsado(true);
+        repository.save(tokenCadastroAluno);
     }
 
     // (Opcional) para limpeza automática

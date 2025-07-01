@@ -23,7 +23,6 @@ public record AlunoDto(
         String comentarioLivre,
         String imagemPerfil,
         List<String>fotos,
-        
         String linkedin
 ) {
 

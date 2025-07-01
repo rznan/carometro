@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Controller
-@RequestMapping("/home")
+@RequestMapping("/adm")
 public class TokenController {
 
     @Value("${app.url.base}")
@@ -28,7 +28,7 @@ public class TokenController {
     public String loadForm(Model model) {
         model.addAttribute("alunoId", 1);
         model.addAttribute("quantidade", 0);
-        return "home/tokengenerator";
+        return "admin/tokengenerator";
     }
 
     // Token para criação em massa
@@ -37,11 +37,11 @@ public class TokenController {
         List<String> tokensGerados = tokenCadastroService.gerarTokensNovos(quantidade);
 
         List<String> links = tokensGerados.stream()
-                .map(token -> baseUrl + "/alunos/novo?token=" + token)
+                .map(token -> baseUrl + "/solicitacoes/novo?token=" + token)
                 .toList();
 
         model.addAttribute("links", links);
-        return "home/tokengenerator";
+        return "admin/tokengenerator";
     }
 
     // Token para edição de perfil de aluno
@@ -53,7 +53,7 @@ public class TokenController {
         String link = baseUrl + "/alunos/" + alunoId + "/editar?token=" + token;
 
         model.addAttribute("links", Collections.singletonList(link));
-        return "home/tokengenerator";
+        return "admin/tokengenerator";
     }
 
 }

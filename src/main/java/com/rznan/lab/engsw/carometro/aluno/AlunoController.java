@@ -82,7 +82,7 @@ public class AlunoController {
             return "aluno/registry";
         }
         try {
-            AlunoDto saved = alunoServiceImpl.save(dto, imagem);
+            Aluno saved = alunoServiceImpl.save(dto, imagem);
             logger.info("[Carômetro] -- Aluno salvo como: {}", saved);
         }catch (Exception e){
             logger.error("Erro ao salvar curso", e);

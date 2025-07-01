@@ -44,7 +44,7 @@ public class AlunoServiceImpl implements IAlunoService {
     @Override
     public List<AlunoDto> findByStatus() {
         //Busca os alunos que foram aprovados e devem ser exibidos
-        return alunoRepository.findByAprovadoTrue(true).stream()
+        return alunoRepository.findByAprovadoTrue().stream()
                 .map(AlunoDto::new)
                 .toList();
     }
@@ -83,14 +83,20 @@ public class AlunoServiceImpl implements IAlunoService {
         return alunos;
     }
 
+
+    /**
+     * Criação direta de aluno sem solicitação. Usado somente por administradores.
+     * Para fluxo público de cadastro, utilize SolicitacaoCadastroAlunoServiceImpl.
+     */
+
     @Override
     @Transactional
-    public AlunoDto save(CreateAlunoDto dto, MultipartFile imagem) throws Exception {
+    public Aluno save(CreateAlunoDto dto, MultipartFile imagem) throws Exception {
         if (dto == null) return null;
         Aluno aluno = new Aluno(dto);
         processImagem(imagem, aluno);
         addCursoToAluno(dto.idCurso(), aluno);
-        return new AlunoDto(alunoRepository.save(aluno));
+        return alunoRepository.save(aluno);
     }
 
     @Override

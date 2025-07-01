@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{template.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Solicitações Pendentes</title>
+</head>
+<body>
+<section layout:fragment="conteudo">
+    <div class="container">
+        <h1>Solicitações Pendentes de Cadastro</h1>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Data da Solicitação</th>
+                <th>ID do Aluno</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="solicitacao : ${solicitacoes}">
+                <td th:text="${solicitacao.id}">1</td>
+                <td th:text="${#temporals.format(solicitacao.dataSolicitacao, 'dd/MM/yyyy HH:mm')}">Data</td>
+                <td th:text="${solicitacao.aluno_id}">123</td>
+                <td th:text="${solicitacao.statusSolicitacao}">PENDENTE</td>
+                <td>
+                    <a th:href="@{/alunos/{id}/detalhes(id=${solicitacao.aluno_id})}" class="btn btn-sm btn-info">Ver Detalhes</a>
+                    <form th:action="@{/solicitacoes/{id}/aprovar(id=${solicitacao.id})}" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-success">Aprovar</button>
+                    </form>
+                    <form th:action="@{/solicitacoes/{id}/recusar(id=${solicitacao.id})}" method="post" style="display:inline; margin-left:5px;">
+                        <button type="submit" class="btn btn-sm btn-danger">Recusar</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+</body>
+</html>

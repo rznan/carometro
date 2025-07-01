@@ -13,7 +13,7 @@
     <div class="container mt-5">
         <h2 class="mb-4">Cadastro de Aluno</h2>
 
-        <form th:action="@{/alunos}" th:object="${aluno}" method="post" enctype="multipart/form-data"
+        <form th:action="@{'/solicitacoes/enviar'(token=${token})}" th:object="${aluno}" method="post" enctype="multipart/form-data"
               class="needs-validation">
 
             <div class="mb-3">

@@ -21,7 +21,7 @@
         <hr>
 
         <!-- Geração em massa (criação de novos alunos) -->
-        <form th:action="@{/home/gerar-novos}" method="post" class="mb-4">
+        <form th:action="@{/adm/gerar-novos}" method="post" class="mb-4">
             <div class="mb-3">
                 <label for="quantidade" class="form-label">Quantidade de tokens para novos alunos</label>
                 <input type="number" id="quantidade" name="quantidade" class="form-control" min="1" required>
@@ -30,7 +30,7 @@
         </form>
 
         <!-- Geração para edição de perfil -->
-        <form th:action="@{/home/gerar-edicao}" method="post">
+        <form th:action="@{/adm/gerar-edicao}" method="post">
             <div class="mb-3">
                 <label for="alunoNome" class="form-label">Selecionar aluno</label>
                 <select id="alunoNome" class="form-control" style="width: 100%">

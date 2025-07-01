@@ -2,7 +2,9 @@ package com.rznan.lab.engsw.carometro.TokenGenerator;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -11,6 +13,8 @@ import java.time.LocalDateTime;
 @Entity(name = "token_criacao_aluno")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class TokenCadastroAluno {
 
     @Id

@@ -1,5 +1,6 @@
 package com.rznan.lab.engsw.carometro.aluno.dtos;
 
+import com.rznan.lab.engsw.carometro.aluno.Aluno;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
@@ -34,4 +35,24 @@ public record UpdateAlunoDto(
         @URL(message = "Url Invalida")
         String linkedin
 ) {
+
+        public UpdateAlunoDto(Aluno a){
+                this(
+                        a.getId(),
+                        a.getCurso().getId(),
+                        a.getNome(),
+                        a.getApelido(),
+                        a.getAnoFormado(),
+                        a.getSobreMimProfissional(),
+                        a.getSobreMimSocial(),
+                        a.getComentarioFaculdade(),
+                        a.getComentarioLivre(),
+                        a.getImagemPerfil(),
+                        a.getFotos(),
+                        a.getLinkedin()
+                );
+        }
+
+
+
 }
